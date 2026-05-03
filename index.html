@@ -1,0 +1,1129 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-theme="dark" data-lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nuvarix — وكالة تطوير الويب والموبايل</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;700;800&family=Cairo:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+/* ═══════════════════════════════════════════
+   TOKENS — DARK
+═══════════════════════════════════════════ */
+:root,
+[data-theme="dark"] {
+  --bg: #050508;
+  --bg2: #0a0a10;
+  --surface: rgba(255,255,255,0.03);
+  --surface-hover: rgba(255,255,255,0.06);
+  --card-border: rgba(255,255,255,0.06);
+  --accent: #00D4FF;
+  --accent-dim: rgba(0,212,255,0.12);
+  --accent-glow: rgba(0,212,255,0.4);
+  --text: #F0F4FF;
+  --text-muted: rgba(240,244,255,0.55);
+  --text-faint: rgba(240,244,255,0.28);
+  --nav-bg: rgba(5,5,8,0.85);
+  --nav-border: rgba(0,212,255,0.1);
+  --footer-border: rgba(255,255,255,0.05);
+  --grid-line: rgba(0,212,255,0.025);
+  --scanline: rgba(0,0,0,0.04);
+  --tag-bg: rgba(0,212,255,0.05);
+  --btn-outline-border: rgba(240,244,255,0.2);
+  --shadow-card: 0 20px 40px rgba(0,0,0,0.4);
+  --logo-faint: rgba(240,244,255,0.3);
+  --nav-h: 70px;
+  --transition: 0.35s cubic-bezier(0.4,0,0.2,1);
+}
+
+/* ═══════════════════════════════════════════
+   TOKENS — LIGHT
+═══════════════════════════════════════════ */
+[data-theme="light"] {
+  --bg: #F5F7FF;
+  --bg2: #ECEEF8;
+  --surface: rgba(255,255,255,0.8);
+  --surface-hover: rgba(255,255,255,1);
+  --card-border: rgba(0,0,0,0.07);
+  --accent: #0070E0;
+  --accent-dim: rgba(0,112,224,0.1);
+  --accent-glow: rgba(0,112,224,0.3);
+  --text: #0D0F1C;
+  --text-muted: rgba(13,15,28,0.6);
+  --text-faint: rgba(13,15,28,0.35);
+  --nav-bg: rgba(245,247,255,0.9);
+  --nav-border: rgba(0,112,224,0.15);
+  --footer-border: rgba(0,0,0,0.07);
+  --grid-line: rgba(0,112,224,0.04);
+  --scanline: transparent;
+  --tag-bg: rgba(0,112,224,0.07);
+  --btn-outline-border: rgba(13,15,28,0.2);
+  --shadow-card: 0 8px 32px rgba(0,0,0,0.08);
+  --logo-faint: rgba(13,15,28,0.3);
+}
+
+/* ═══════════════════════════════════════════
+   BASE
+═══════════════════════════════════════════ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  overflow-x: hidden;
+  line-height: 1.6;
+  transition: background var(--transition), color var(--transition);
+}
+
+[data-lang="ar"] body,
+[data-lang="ar"] .service-name,
+[data-lang="ar"] .project-name,
+[data-lang="ar"] .contact-title,
+[data-lang="ar"] h1,
+[data-lang="ar"] h2,
+[data-lang="ar"] h3 {
+  font-family: 'Cairo', sans-serif;
+}
+
+[data-lang="en"] body,
+[data-lang="en"] .service-name,
+[data-lang="en"] .project-name,
+[data-lang="en"] .contact-title,
+[data-lang="en"] h1.hero-title,
+[data-lang="en"] h2,
+[data-lang="en"] h3 {
+  font-family: 'Space Mono', monospace;
+}
+
+[data-lang="en"] h1.hero-title,
+[data-lang="en"] .service-name,
+[data-lang="en"] .project-name,
+[data-lang="en"] .contact-title {
+  font-family: 'Syne', sans-serif;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+  background-size: 60px 60px;
+  pointer-events: none;
+  z-index: 0;
+  transition: background-image var(--transition);
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: repeating-linear-gradient(0deg,transparent,transparent 2px,var(--scanline) 2px,var(--scanline) 4px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ─── TOP BAR ─── */
+.top-bar {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 0 5%;
+  gap: 8px;
+  z-index: 200;
+  border-bottom: 1px solid var(--footer-border);
+  background: var(--bg);
+  transition: background var(--transition);
+}
+
+.top-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-family: 'Space Mono', monospace;
+  padding: 4px 12px;
+  border: 1px solid var(--card-border);
+  background: var(--surface);
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.2s;
+  border-radius: 2px;
+}
+.top-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.top-btn.active {
+  background: var(--accent-dim);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.top-divider {
+  width: 1px;
+  height: 14px;
+  background: var(--card-border);
+}
+
+/* ─── NAVBAR ─── */
+nav {
+  position: fixed;
+  top: 36px; left: 0; right: 0;
+  height: var(--nav-h);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 5%;
+  z-index: 100;
+  transition: background var(--transition), border-color var(--transition);
+}
+nav.scrolled {
+  background: var(--nav-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--nav-border);
+}
+
+.nav-logo {
+  font-family: 'Space Mono', monospace;
+  font-size: 1.05rem;
+  font-weight: 700;
+  text-decoration: none;
+  letter-spacing: 0.05em;
+}
+.nav-logo span:first-child { color: var(--accent); }
+.nav-logo span:last-child { color: var(--logo-faint); }
+
+.nav-links {
+  display: flex;
+  gap: 2.5rem;
+  list-style: none;
+}
+.nav-links a {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-family: 'Space Mono', monospace;
+  transition: color 0.2s;
+  position: relative;
+}
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -3px; left: 0; right: 0;
+  height: 1px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transition: transform 0.2s;
+  transform-origin: right;
+}
+[dir="rtl"] .nav-links a::after { transform-origin: left; }
+.nav-links a:hover { color: var(--accent); }
+.nav-links a:hover::after { transform: scaleX(1); }
+
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  padding: 4px;
+  background: none;
+  border: none;
+}
+.hamburger span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--text);
+  transition: transform 0.3s, opacity 0.3s;
+}
+.hamburger.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.hamburger.active span:nth-child(2) { opacity: 0; }
+.hamburger.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+.mobile-menu {
+  display: none;
+  position: fixed;
+  top: calc(36px + var(--nav-h));
+  left: 0; right: 0;
+  background: var(--bg);
+  backdrop-filter: blur(20px);
+  padding: 2rem 5%;
+  border-bottom: 1px solid var(--nav-border);
+  z-index: 99;
+}
+.mobile-menu.open { display: block; }
+.mobile-menu a {
+  display: block;
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-family: 'Space Mono', monospace;
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--card-border);
+  transition: color 0.2s;
+}
+.mobile-menu a:hover { color: var(--accent); }
+
+/* ─── SECTION BASE ─── */
+section {
+  position: relative;
+  z-index: 1;
+  padding: 7rem 5%;
+}
+
+.section-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.22em;
+  color: var(--accent);
+  text-transform: uppercase;
+  margin-bottom: 3rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.section-label::after {
+  content: '';
+  flex: 1;
+  max-width: 80px;
+  height: 1px;
+  background: var(--accent);
+  opacity: 0.4;
+}
+
+.corner-tl,.corner-tr,.corner-bl,.corner-br {
+  position: absolute; width: 20px; height: 20px; pointer-events: none;
+}
+.corner-tl { top: 16px; left: 16px; border-top: 1px solid var(--accent); border-left: 1px solid var(--accent); opacity: 0.4; }
+.corner-tr { top: 16px; right: 16px; border-top: 1px solid var(--accent); border-right: 1px solid var(--accent); opacity: 0.4; }
+.corner-bl { bottom: 16px; left: 16px; border-bottom: 1px solid var(--accent); border-left: 1px solid var(--accent); opacity: 0.4; }
+.corner-br { bottom: 16px; right: 16px; border-bottom: 1px solid var(--accent); border-right: 1px solid var(--accent); opacity: 0.4; }
+
+/* ─── HERO ─── */
+#hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-top: calc(36px + var(--nav-h) + 4rem);
+  padding-bottom: 4rem;
+  overflow: hidden;
+}
+
+.hero-inner { max-width: 820px; }
+
+.hero-eyebrow {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.25em;
+  color: var(--accent);
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+  opacity: 0;
+  animation: fadeUp 0.8s 0.2s forwards;
+}
+
+h1.hero-title {
+  font-size: clamp(2.8rem, 7.5vw, 6.5rem);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  margin-bottom: 1.5rem;
+  opacity: 0;
+  animation: fadeUp 0.8s 0.4s forwards;
+}
+[data-lang="ar"] h1.hero-title {
+  font-family: 'Cairo', sans-serif;
+  font-weight: 900;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+}
+h1.hero-title .white { color: var(--text); }
+h1.hero-title .neon {
+  color: var(--accent);
+  text-shadow: 0 0 40px var(--accent-glow);
+}
+
+.hero-sub {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  letter-spacing: 0.08em;
+  margin-bottom: 3rem;
+  opacity: 0;
+  animation: fadeUp 0.8s 0.6s forwards;
+  font-family: 'Space Mono', monospace;
+}
+[data-lang="ar"] .hero-sub {
+  font-family: 'Cairo', sans-serif;
+  font-size: 1rem;
+  letter-spacing: 0;
+}
+
+.hero-ctas {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  opacity: 0;
+  animation: fadeUp 0.8s 0.8s forwards;
+}
+
+/* ─── BUTTONS ─── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 0.85rem 2rem;
+  transition: all 0.3s;
+  cursor: pointer;
+  border: none;
+  position: relative;
+}
+[data-lang="ar"] .btn {
+  font-family: 'Cairo', sans-serif;
+  letter-spacing: 0.05em;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: #050508;
+  font-weight: 700;
+}
+.btn-primary:hover {
+  filter: brightness(1.15);
+  box-shadow: 0 0 30px var(--accent-glow);
+  transform: translateY(-2px);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--text);
+  border: 1px solid var(--btn-outline-border);
+}
+.btn-outline:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  box-shadow: 0 0 20px var(--accent-dim);
+  transform: translateY(-2px);
+}
+
+/* HERO SVG */
+.hero-line {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 45%;
+  height: 400px;
+  overflow: hidden;
+  pointer-events: none;
+  opacity: 0.4;
+}
+[data-theme="light"] .hero-line { opacity: 0.25; }
+.hero-line svg { width: 100%; height: 100%; }
+
+/* PARTICLES */
+#particles { position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: 0; }
+.hero-inner { position: relative; z-index: 1; }
+.particle {
+  position: absolute;
+  width: 2px; height: 2px;
+  background: var(--accent);
+  border-radius: 50%;
+  animation: float linear infinite;
+  opacity: 0;
+}
+@keyframes float {
+  0%   { transform: translateY(0) translateX(0); opacity: 0; }
+  10%  { opacity: 0.6; }
+  90%  { opacity: 0.3; }
+  100% { transform: translateY(-100vh) translateX(var(--dx)); opacity: 0; }
+}
+
+/* ─── STATS BAR ─── */
+.stats-bar {
+  display: flex;
+  gap: 3rem;
+  padding: 2.5rem 0;
+  border-top: 1px solid var(--card-border);
+  border-bottom: 1px solid var(--card-border);
+  margin-bottom: 5rem;
+  flex-wrap: wrap;
+}
+.stat-number {
+  font-family: 'Space Mono', monospace;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--accent);
+  line-height: 1;
+}
+.stat-label {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-top: 4px;
+}
+[data-lang="ar"] .stat-label { font-family: 'Cairo', sans-serif; letter-spacing: 0; }
+
+/* ─── SERVICES ─── */
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 1.5rem;
+}
+
+.service-card {
+  background: var(--surface);
+  border: 1px solid var(--card-border);
+  border-left: 2px solid var(--accent);
+  padding: 2rem 1.5rem;
+  transition: box-shadow 0.3s, transform 0.3s, background 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+[dir="rtl"] .service-card { border-left: none; border-right: 2px solid var(--accent); }
+
+.service-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, var(--accent-dim) 0%, transparent 60%);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.service-card:hover {
+  box-shadow: 0 0 30px rgba(0,212,255,0.1), inset 0 0 20px var(--accent-dim);
+  transform: translateY(-4px);
+  background: var(--surface-hover);
+}
+[data-theme="light"] .service-card:hover {
+  box-shadow: 0 8px 24px rgba(0,112,224,0.12);
+}
+.service-card:hover::after { opacity: 1; }
+
+.service-icon {
+  font-size: 1.6rem;
+  margin-bottom: 1.2rem;
+  display: block;
+  color: var(--accent);
+  /* prevent fa pseudo-elements from being cut off */
+  line-height: 1;
+}
+
+.service-name {
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin-bottom: 0.4rem;
+  color: var(--text);
+}
+.service-price {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.68rem;
+  color: var(--accent);
+  letter-spacing: 0.1em;
+  margin-bottom: 1rem;
+  font-weight: 700;
+}
+.service-desc {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  line-height: 1.75;
+}
+[data-lang="ar"] .service-desc { font-family: 'Cairo', sans-serif; font-size: 0.9rem; }
+
+/* ─── PROJECTS ─── */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+  gap: 1.5rem;
+}
+
+.project-card {
+  background: var(--surface);
+  border: 1px solid var(--card-border);
+  border-top: 2px solid var(--accent);
+  padding: 2rem;
+  transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
+  display: flex;
+  flex-direction: column;
+}
+.project-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-card), 0 0 20px var(--accent-dim);
+  background: var(--surface-hover);
+}
+
+.project-type {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.62rem;
+  color: var(--text-faint);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin-bottom: 0.6rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.project-type i {
+  color: var(--accent);
+  font-size: 0.75rem;
+}
+.project-name {
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: var(--text);
+}
+[data-lang="ar"] .project-name { font-family: 'Cairo', sans-serif; }
+.project-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1.2rem;
+}
+.tag {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.1em;
+  color: var(--accent);
+  border: 1px solid rgba(0,212,255,0.25);
+  padding: 0.25rem 0.65rem;
+  background: var(--tag-bg);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+.tag i { font-size: 0.65rem; }
+[data-theme="light"] .tag { border-color: rgba(0,112,224,0.25); }
+.project-desc {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  line-height: 1.75;
+  flex: 1;
+  margin-bottom: 1.5rem;
+}
+[data-lang="ar"] .project-desc { font-family: 'Cairo', sans-serif; font-size: 0.88rem; }
+.project-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--accent);
+  text-decoration: none;
+  transition: gap 0.2s;
+}
+.project-link:hover { gap: 0.85rem; }
+[dir="rtl"] .project-link .arrow-icon { transform: scaleX(-1); }
+
+/* ─── CONTACT ─── */
+#contact {
+  text-align: center;
+}
+
+.contact-title {
+  font-size: clamp(2.2rem, 5.5vw, 5rem);
+  font-weight: 800;
+  margin-bottom: 1rem;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+[data-lang="ar"] .contact-title { font-family: 'Cairo', sans-serif; font-weight: 900; }
+.contact-title span { color: var(--accent); text-shadow: 0 0 40px var(--accent-glow); }
+
+.contact-sub {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  margin-bottom: 3.5rem;
+  letter-spacing: 0.06em;
+}
+[data-lang="ar"] .contact-sub { font-family: 'Cairo', sans-serif; font-size: 0.95rem; letter-spacing: 0; }
+
+.contact-items {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 3rem;
+  margin-bottom: 3.5rem;
+}
+.contact-item { display: flex; flex-direction: column; align-items: center; gap: 0.5rem; }
+.contact-item-icon {
+  font-size: 1.4rem;
+  color: var(--accent);
+  margin-bottom: 0.3rem;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--accent-dim);
+  background: var(--accent-dim);
+  border-radius: 50%;
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+.contact-item:hover .contact-item-icon {
+  box-shadow: 0 0 20px var(--accent-glow);
+  transform: scale(1.1);
+}
+.contact-item-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.58rem;
+  letter-spacing: 0.22em;
+  color: var(--text-faint);
+  text-transform: uppercase;
+}
+.contact-item-value { font-size: 0.82rem; color: var(--text); }
+.contact-item-value a { color: inherit; text-decoration: none; transition: color 0.2s; }
+.contact-item-value a:hover { color: var(--accent); }
+
+/* ─── FOOTER ─── */
+footer {
+  position: relative;
+  z-index: 1;
+  border-top: 1px solid var(--footer-border);
+  padding: 2rem 5%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  transition: border-color var(--transition);
+}
+.footer-logo {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+.footer-logo span { color: var(--accent); }
+.footer-right {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.68rem;
+  color: var(--text-faint);
+  letter-spacing: 0.05em;
+}
+
+/* ─── SCROLL ANIMATIONS ─── */
+.fade-in {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.fade-in.visible { opacity: 1; transform: translateY(0); }
+.fade-in-delay-1 { transition-delay: 0.1s; }
+.fade-in-delay-2 { transition-delay: 0.2s; }
+.fade-in-delay-3 { transition-delay: 0.3s; }
+.fade-in-delay-4 { transition-delay: 0.4s; }
+
+/* ─── KEYFRAMES ─── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes pulse-line {
+  0%,100% { opacity: 0.3; }
+  50%      { opacity: 0.7; }
+}
+@keyframes dash {
+  to { stroke-dashoffset: -200; }
+}
+.animated-line { stroke-dasharray: 8 4; animation: dash 3s linear infinite; }
+.animated-line-slow { stroke-dasharray: 20 10; animation: dash 6s linear infinite; }
+.glow-pulse { animation: pulse-line 3s ease-in-out infinite; }
+
+/* ─── LANGUAGE CONTENT ─── */
+[data-lang="ar"] .lang-en { display: none; }
+[data-lang="en"] .lang-ar { display: none; }
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .hamburger { display: flex; }
+  section { padding: 5rem 5%; }
+  .hero-line { display: none; }
+  .contact-items { gap: 2rem; }
+  .stats-bar { gap: 2rem; }
+}
+@media (max-width: 480px) {
+  .hero-ctas { flex-direction: column; }
+  .btn { text-align: center; justify-content: center; }
+  footer { flex-direction: column; text-align: center; }
+  .top-bar { justify-content: center; }
+}
+</style>
+</head>
+<body>
+
+<!-- ─── TOP BAR ─── -->
+<div class="top-bar">
+  <button class="top-btn active" id="btn-ar" onclick="setLang('ar')">
+    <i class="fa-solid fa-globe"></i> العربية
+  </button>
+  <button class="top-btn" id="btn-en" onclick="setLang('en')">
+    <i class="fa-solid fa-earth-americas"></i> English
+  </button>
+  <div class="top-divider"></div>
+  <button class="top-btn active" id="btn-dark" onclick="setTheme('dark')">
+    <i class="fa-solid fa-moon"></i> Dark
+  </button>
+  <button class="top-btn" id="btn-light" onclick="setTheme('light')">
+    <i class="fa-solid fa-sun"></i> Light
+  </button>
+</div>
+
+<!-- ─── NAVBAR ─── -->
+<nav id="navbar">
+  <a class="nav-logo" href="#">
+    <span>Nuvarix</span><span>.agency</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#services"><span class="lang-ar">الخدمات</span><span class="lang-en">Services</span></a></li>
+    <li><a href="#projects"><span class="lang-ar">المشاريع</span><span class="lang-en">Projects</span></a></li>
+    <li><a href="#contact"><span class="lang-ar">تواصل</span><span class="lang-en">Contact</span></a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobile-menu">
+  <a href="#services" onclick="closeMobile()"><span class="lang-ar">الخدمات</span><span class="lang-en">Services</span></a>
+  <a href="#projects" onclick="closeMobile()"><span class="lang-ar">المشاريع</span><span class="lang-en">Projects</span></a>
+  <a href="#contact" onclick="closeMobile()"><span class="lang-ar">تواصل</span><span class="lang-en">Contact</span></a>
+</div>
+
+<!-- ─── HERO ─── -->
+<section id="hero">
+  <div class="corner-tl"></div>
+  <div class="corner-tr"></div>
+  <div class="corner-bl"></div>
+  <div class="corner-br"></div>
+  <div id="particles"></div>
+
+  <div class="hero-line" aria-hidden="true">
+    <svg viewBox="0 0 500 400" fill="none">
+      <line x1="400" y1="0" x2="50" y2="400" stroke="var(--accent)" stroke-width="0.5" class="animated-line glow-pulse"/>
+      <line x1="460" y1="0" x2="110" y2="400" stroke="var(--accent)" stroke-width="0.3" class="animated-line-slow"/>
+      <line x1="350" y1="0" x2="0" y2="350" stroke="var(--accent)" stroke-width="0.2" class="animated-line-slow glow-pulse" style="animation-delay:-2s"/>
+      <circle cx="400" cy="60" r="80" stroke="var(--accent)" stroke-width="0.3" fill="none" class="glow-pulse"/>
+      <circle cx="400" cy="60" r="120" stroke="var(--accent)" stroke-width="0.15" fill="none" class="glow-pulse" style="animation-delay:-1s"/>
+      <circle cx="400" cy="60" r="160" stroke="var(--accent)" stroke-width="0.1" fill="none" class="glow-pulse" style="animation-delay:-2s"/>
+      <path d="M200 200 L350 80 L420 150 L300 280 Z" stroke="var(--accent)" stroke-width="0.3" fill="none" class="animated-line" style="animation-duration:8s"/>
+    </svg>
+  </div>
+
+  <div class="hero-inner">
+    <p class="hero-eyebrow">// Est. 2026 — Saida, Algeria</p>
+    <h1 class="hero-title">
+      <span class="lang-ar">
+        <span class="white">نبني</span><br>
+        <span class="neon">منتجات رقمية</span>
+      </span>
+      <span class="lang-en">
+        <span class="white">We Build</span><br>
+        <span class="neon">Digital Products</span>
+      </span>
+    </h1>
+    <p class="hero-sub">
+      <span class="lang-ar">وكالة تطوير الويب والموبايل — الجزائر</span>
+      <span class="lang-en">Web &amp; Mobile Development Agency — Algeria</span>
+    </p>
+    <div class="hero-ctas">
+      <a href="#projects" class="btn btn-primary">
+        <i class="fa-solid fa-rocket"></i>
+        <span class="lang-ar">استعرض المشاريع</span>
+        <span class="lang-en">View Projects</span>
+      </a>
+      <a href="#contact" class="btn btn-outline">
+        <i class="fa-solid fa-paper-plane"></i>
+        <span class="lang-ar">تواصل معنا</span>
+        <span class="lang-en">Contact Us</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ─── STATS BAR ─── -->
+<section style="padding: 0 5%; position: relative; z-index: 1;">
+  <div class="stats-bar fade-in">
+    <div class="stat-item">
+      <div class="stat-number">3+</div>
+      <div class="stat-label"><span class="lang-ar">مشاريع منجزة</span><span class="lang-en">Projects Done</span></div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number">2</div>
+      <div class="stat-label"><span class="lang-ar">مطورون متخصصون</span><span class="lang-en">Expert Devs</span></div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number">2026</div>
+      <div class="stat-label"><span class="lang-ar">تأسست</span><span class="lang-en">Founded</span></div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number">DZ</div>
+      <div class="stat-label"><span class="lang-ar">صنع في الجزائر</span><span class="lang-en">Made in Algeria</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── SERVICES ─── -->
+<section id="services">
+  <p class="section-label fade-in">01 / <span class="lang-ar">الخدمات</span><span class="lang-en">Services</span></p>
+  <div class="services-grid">
+
+    <div class="service-card fade-in fade-in-delay-1">
+      <span class="service-icon"><i class="fa-solid fa-bolt-lightning"></i></span>
+      <p class="service-name"><span class="lang-ar">صفحة هبوط</span><span class="lang-en">Landing Page</span></p>
+      <p class="service-price"><span class="lang-ar">ابتداءً من 15,000 دج</span><span class="lang-en">From 15,000 DZD</span></p>
+      <p class="service-desc">
+        <span class="lang-ar">صفحات هبوط احترافية مُحسّنة للأداء ومحركات البحث SEO، مصممة للتحويل.</span>
+        <span class="lang-en">High-converting, pixel-perfect landing pages optimized for performance and SEO.</span>
+      </p>
+    </div>
+
+    <div class="service-card fade-in fade-in-delay-2">
+      <span class="service-icon"><i class="fa-solid fa-globe"></i></span>
+      <p class="service-name"><span class="lang-ar">موقع كامل</span><span class="lang-en">Full Website</span></p>
+      <p class="service-price"><span class="lang-ar">ابتداءً من 40,000 دج</span><span class="lang-en">From 40,000 DZD</span></p>
+      <p class="service-desc">
+        <span class="lang-ar">مواقع ويب متكاملة متعددة الصفحات مع لوحة تحكم، CMS، وتجربة مستخدم متميزة.</span>
+        <span class="lang-en">Complete web solutions — multi-page sites, CMS integration, admin panels and more.</span>
+      </p>
+    </div>
+
+    <div class="service-card fade-in fade-in-delay-3">
+      <span class="service-icon"><i class="fa-brands fa-flutter"></i></span>
+      <p class="service-name"><span class="lang-ar">تطبيق Flutter</span><span class="lang-en">Flutter App</span></p>
+      <p class="service-price"><span class="lang-ar">ابتداءً من 60,000 دج</span><span class="lang-en">From 60,000 DZD</span></p>
+      <p class="service-desc">
+        <span class="lang-ar">تطبيقات موبايل عالية الأداء لـ iOS وAndroid بواجهة حديثة وتجربة سلسة.</span>
+        <span class="lang-en">Cross-platform mobile apps for iOS &amp; Android with native performance and modern UI.</span>
+      </p>
+    </div>
+
+    <div class="service-card fade-in fade-in-delay-4">
+      <span class="service-icon"><i class="fa-solid fa-server"></i></span>
+      <p class="service-name"><span class="lang-ar">Laravel API</span><span class="lang-en">Laravel API</span></p>
+      <p class="service-price"><span class="lang-ar">ابتداءً من 30,000 دج</span><span class="lang-en">From 30,000 DZD</span></p>
+      <p class="service-desc">
+        <span class="lang-ar">واجهات برمجية RESTful قوية ببنية محكمة — مصادقة، قواعد بيانات، ومنطق أعمال.</span>
+        <span class="lang-en">Robust RESTful APIs built with Laravel — authentication, databases, business logic.</span>
+      </p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ─── PROJECTS ─── -->
+<section id="projects">
+  <p class="section-label fade-in">02 / <span class="lang-ar">المشاريع</span><span class="lang-en">Projects</span></p>
+  <div class="projects-grid">
+
+    <div class="project-card fade-in fade-in-delay-1">
+      <p class="project-type">
+        <i class="fa-solid fa-utensils"></i>
+        <span class="lang-ar">موقع مطعم</span><span class="lang-en">Restaurant Website</span>
+      </p>
+      <h3 class="project-name">Dar Zitoun</h3>
+      <div class="project-tags">
+        <span class="tag"><i class="fa-brands fa-laravel"></i> Laravel</span>
+        <span class="tag"><i class="fa-brands fa-react"></i> React</span>
+      </div>
+      <p class="project-desc">
+        <span class="lang-ar">موقع مطعم متكامل مع إدارة القائمة، نظام حجز طاولات، وتجربة معرض صور غامرة.</span>
+        <span class="lang-en">Full restaurant website with menu management, reservation system and an immersive gallery experience.</span>
+      </p>
+      <a href="projects/dar-zitoun-project.html" class="project-link">
+        <span class="lang-ar">عرض المشروع</span><span class="lang-en">View Project</span>
+        <i class="fa-solid fa-arrow-right arrow-icon"></i>
+      </a>
+    </div>
+
+    <div class="project-card fade-in fade-in-delay-2">
+      <p class="project-type">
+        <i class="fa-solid fa-shirt"></i>
+        <span class="lang-ar">تطبيق متجر ملابس</span><span class="lang-en">Clothing Store App</span>
+      </p>
+      <h3 class="project-name">Noor Store</h3>
+      <div class="project-tags">
+        <span class="tag"><i class="fa-brands fa-react"></i> React</span>
+      </div>
+      <p class="project-desc">
+        <span class="lang-ar">متجر ملابس بتصميم Mobile-first مع فلترة ذكية، سلة تسوق، وطلب سريع عبر واتساب.</span>
+        <span class="lang-en">Mobile-first clothing store with smart filtering, cart management and seamless WhatsApp ordering flow.</span>
+      </p>
+      <a href="projects/noorstore.html" class="project-link">
+        <span class="lang-ar">عرض المشروع</span><span class="lang-en">View Project</span>
+        <i class="fa-solid fa-arrow-right arrow-icon"></i>
+      </a>
+    </div>
+
+    <div class="project-card fade-in fade-in-delay-3">
+      <p class="project-type">
+        <i class="fa-solid fa-boxes-stacked"></i>
+        <span class="lang-ar">لوحة إدارة مخزون</span><span class="lang-en">Inventory Dashboard</span>
+      </p>
+      <h3 class="project-name">StockPro DZ</h3>
+      <div class="project-tags">
+        <span class="tag"><i class="fa-brands fa-laravel"></i> Laravel</span>
+        <span class="tag"><i class="fa-brands fa-react"></i> React</span>
+      </div>
+      <p class="project-desc">
+        <span class="lang-ar">لوحة تحكم متكاملة لإدارة المخزون مع تحليلات فورية، تقارير شاملة، ودعم متعدد المستودعات.</span>
+        <span class="lang-en">Full-featured inventory management dashboard with real-time analytics, reporting and multi-warehouse support.</span>
+      </p>
+      <a href="projects/stockpro-dz-project.html" class="project-link">
+        <span class="lang-ar">عرض المشروع</span><span class="lang-en">View Project</span>
+        <i class="fa-solid fa-arrow-right arrow-icon"></i>
+      </a>
+    </div>
+
+  </div>
+</section>
+
+<!-- ─── CONTACT ─── -->
+<section id="contact">
+  <div class="corner-tl"></div><div class="corner-tr"></div>
+  <div class="corner-bl"></div><div class="corner-br"></div>
+
+  <p class="section-label fade-in" style="justify-content:center;">
+    03 / <span class="lang-ar">تواصل</span><span class="lang-en">Contact</span>
+  </p>
+
+  <h2 class="contact-title fade-in">
+    <span class="lang-ar">ابدأ<br><span>مشروعك</span></span>
+    <span class="lang-en">Start Your<br><span>Project</span></span>
+  </h2>
+  <p class="contact-sub fade-in">
+    <span class="lang-ar">جاهز لبناء شيء رائع؟ دعنا نتحدث.</span>
+    <span class="lang-en">Ready to build something great? Let's talk.</span>
+  </p>
+
+  <div class="contact-items fade-in">
+    <div class="contact-item">
+      <div class="contact-item-icon"><i class="fa-brands fa-instagram"></i></div>
+      <p class="contact-item-label">Instagram</p>
+      <p class="contact-item-value"><a href="https://instagram.com/nuvarix" target="_blank" rel="noopener">@nuvarix</a></p>
+    </div>
+    <div class="contact-item">
+      <div class="contact-item-icon"><i class="fa-solid fa-envelope"></i></div>
+      <p class="contact-item-label">Email</p>
+      <p class="contact-item-value"><a href="mailto:nuvarix.agency@gmail.com">nuvarix.agency@gmail.com</a></p>
+    </div>
+    <div class="contact-item">
+      <div class="contact-item-icon"><i class="fa-solid fa-location-dot"></i></div>
+      <p class="contact-item-label"><span class="lang-ar">الموقع</span><span class="lang-en">Location</span></p>
+      <p class="contact-item-value">Saïda, Algeria 🇩🇿</p>
+    </div>
+  </div>
+
+  <div class="fade-in">
+    <a href="https://instagram.com/nuvarix1" class="btn btn-primary" target="_blank" rel="noopener">
+      <i class="fa-brands fa-instagram"></i>
+      <span class="lang-ar">أرسل رسالة مباشرة</span>
+      <span class="lang-en">Send us a DM</span>
+    </a>
+  </div>
+</section>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <div class="footer-logo">
+    <i class="fa-solid fa-code" style="color:var(--accent);font-size:0.85rem;"></i>
+    <span>Nuvarix</span>.agency
+  </div>
+  <div class="footer-right">
+    <span class="lang-ar">صنع في الجزائر 🇩🇿 &nbsp;·&nbsp; © <span id="year"></span> Nuvarix</span>
+    <span class="lang-en">Built in Algeria 🇩🇿 &nbsp;·&nbsp; © <span id="year2"></span> Nuvarix</span>
+  </div>
+</footer>
+
+<script>
+const y = new Date().getFullYear();
+document.getElementById('year').textContent = y;
+document.getElementById('year2').textContent = y;
+
+function setTheme(t) {
+  document.documentElement.setAttribute('data-theme', t);
+  localStorage.setItem('nv-theme', t);
+  document.getElementById('btn-dark').classList.toggle('active', t === 'dark');
+  document.getElementById('btn-light').classList.toggle('active', t === 'light');
+}
+
+function setLang(l) {
+  document.documentElement.setAttribute('data-lang', l);
+  document.documentElement.setAttribute('lang', l);
+  document.documentElement.setAttribute('dir', l === 'ar' ? 'rtl' : 'ltr');
+  localStorage.setItem('nv-lang', l);
+  document.getElementById('btn-ar').classList.toggle('active', l === 'ar');
+  document.getElementById('btn-en').classList.toggle('active', l === 'en');
+}
+
+(function() {
+  const savedTheme = localStorage.getItem('nv-theme') || 'dark';
+  const savedLang  = localStorage.getItem('nv-lang')  || 'ar';
+  setTheme(savedTheme);
+  setLang(savedLang);
+})();
+
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+  navbar.classList.toggle('scrolled', window.scrollY > 20);
+});
+
+const hamburger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobile-menu');
+hamburger.addEventListener('click', () => {
+  hamburger.classList.toggle('active');
+  mobileMenu.classList.toggle('open');
+});
+function closeMobile() {
+  hamburger.classList.remove('active');
+  mobileMenu.classList.remove('open');
+}
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+const container = document.getElementById('particles');
+for (let i = 0; i < 30; i++) {
+  const p = document.createElement('div');
+  p.className = 'particle';
+  const x = Math.random() * 100;
+  const dur = 8 + Math.random() * 16;
+  const delay = -Math.random() * 20;
+  const dx = (Math.random() - 0.5) * 120 + 'px';
+  p.style.cssText = `left:${x}%;bottom:-10px;animation-duration:${dur}s;animation-delay:${delay}s;--dx:${dx};width:${1+Math.random()*2}px;height:${1+Math.random()*2}px;`;
+  container.appendChild(p);
+}
+</script>
+</body>
+</html>

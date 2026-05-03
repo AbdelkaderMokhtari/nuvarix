@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dar Zitoun — Nuvarix Project</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;700;800&family=Playfair+Display:ital,wght@0,400;1,400&family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+  :root {
+    --bg:#050508;--accent:#E8C97A;--accent-dim:rgba(232,201,122,.1);
+    --accent-glow:rgba(232,201,122,.35);--text:#F5F0E8;
+    --text-muted:rgba(245,240,232,.55);--text-faint:rgba(245,240,232,.28);
+    --card-bg:rgba(255,255,255,.03);--card-border:rgba(255,255,255,.07);
+    --gold:#E8C97A;--gold2:#C9A84C;--nav-h:70px;
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--text);font-family:'Space Mono',monospace;overflow-x:hidden;line-height:1.6}
+  body.ar{font-family:'Cairo',sans-serif;direction:rtl}
+
+  /* Subtle arabesque pattern */
+  body::before{content:'';position:fixed;inset:0;
+    background-image:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23E8C97A' fill-opacity='0.018'%3E%3Cpath d='M30 0l8.66 15H21.34L30 0zm0 60l-8.66-15h17.32L30 60zM0 30l15-8.66V38.66L0 30zm60 0l-15 8.66V21.34L60 30z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    pointer-events:none;z-index:0}
+
+  /* NAV */
+  nav{position:fixed;top:0;left:0;right:0;height:var(--nav-h);display:flex;align-items:center;justify-content:space-between;padding:0 5%;z-index:100;background:rgba(5,5,8,.9);backdrop-filter:blur(16px);border-bottom:1px solid rgba(232,201,122,.08)}
+  .nav-logo{font-family:'Space Mono',monospace;font-size:1rem;font-weight:700;text-decoration:none;letter-spacing:.05em}
+  .nav-logo span:first-child{color:var(--accent)}
+  .nav-logo span:last-child{color:var(--text-faint)}
+  .nav-right{display:flex;align-items:center;gap:1.2rem}
+  .lang-btn{display:flex;align-items:center;gap:.4rem;background:var(--card-bg);border:1px solid var(--card-border);color:var(--text-muted);font-family:'Space Mono',monospace;font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;padding:.38rem .85rem;cursor:pointer;transition:all .2s}
+  .lang-btn:hover{border-color:var(--accent);color:var(--accent)}
+  body.ar .lang-btn{font-family:'Cairo',sans-serif;letter-spacing:0}
+  .nav-back{display:flex;align-items:center;gap:.45rem;color:var(--text-muted);text-decoration:none;font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;transition:color .2s}
+  .nav-back:hover{color:var(--accent)}
+  body.ar .nav-back{font-family:'Cairo',sans-serif;letter-spacing:0}
+
+  /* HERO */
+  .project-hero{position:relative;z-index:1;padding:calc(var(--nav-h) + 5rem) 5% 5rem;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;min-height:100vh}
+  .breadcrumb{font-size:.62rem;letter-spacing:.2em;color:var(--text-faint);text-transform:uppercase;margin-bottom:1.2rem;opacity:0;animation:fadeUp .7s .1s forwards}
+  .project-type-tag{display:inline-block;font-size:.62rem;letter-spacing:.14em;color:var(--accent);border:1px solid rgba(232,201,122,.3);padding:.28rem .8rem;margin-bottom:1.4rem;background:rgba(232,201,122,.04);opacity:0;animation:fadeUp .7s .2s forwards}
+  .project-title{font-family:'Syne',sans-serif;font-size:clamp(3.2rem,6vw,5.5rem);font-weight:800;line-height:1;letter-spacing:-.02em;margin-bottom:.4rem;opacity:0;animation:fadeUp .7s .3s forwards}
+  body.ar .project-title{font-family:'Cairo',sans-serif}
+  .project-title-ar{font-family:'Playfair Display',serif;font-style:italic;font-size:1.4rem;color:var(--gold);margin-bottom:2rem;opacity:0;animation:fadeUp .7s .4s forwards}
+  body.ar .project-title-ar{font-family:'Cairo',sans-serif;font-style:normal;font-size:1.15rem}
+  .project-desc-hero{font-size:.8rem;color:var(--text-muted);line-height:1.9;margin-bottom:2.2rem;max-width:480px;opacity:0;animation:fadeUp .7s .5s forwards}
+  body.ar .project-desc-hero{font-family:'Cairo',sans-serif;font-size:.9rem}
+  .hero-meta{display:flex;gap:2rem;flex-wrap:wrap;margin-bottom:2.2rem;opacity:0;animation:fadeUp .7s .6s forwards}
+  .meta-label{font-size:.58rem;letter-spacing:.2em;color:var(--text-faint);text-transform:uppercase;margin-bottom:.3rem}
+  .meta-value{font-size:.78rem;color:var(--text)}
+  body.ar .meta-label,body.ar .meta-value{font-family:'Cairo',sans-serif;letter-spacing:0}
+  .hero-ctas{display:flex;gap:.8rem;flex-wrap:wrap;margin-bottom:2rem;opacity:0;animation:fadeUp .7s .65s forwards}
+  .btn{display:inline-flex;align-items:center;gap:.5rem;font-family:'Space Mono',monospace;font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;padding:.8rem 1.6rem;transition:all .3s;cursor:pointer;border:none}
+  body.ar .btn{font-family:'Cairo',sans-serif;font-size:.82rem;letter-spacing:0}
+  .btn-primary{background:var(--accent);color:#050508;font-weight:700}
+  .btn-primary:hover{background:#fff;box-shadow:0 0 28px var(--accent-glow)}
+  .btn-outline{background:transparent;color:var(--text);border:1px solid rgba(245,240,232,.18)}
+  .btn-outline:hover{border-color:var(--accent);color:var(--accent)}
+  .hero-tags{display:flex;gap:.42rem;flex-wrap:wrap;opacity:0;animation:fadeUp .7s .7s forwards}
+  .tag{font-size:.6rem;letter-spacing:.1em;color:var(--accent);border:1px solid rgba(232,201,122,.22);padding:.28rem .7rem;background:rgba(232,201,122,.04);text-transform:uppercase}
+
+  /* HERO RIGHT — Website Preview Mockup */
+  .hero-right{position:relative;display:flex;justify-content:center;align-items:center;height:620px;opacity:0;animation:fadeUp .9s .4s forwards}
+
+  .browser-wrap{position:relative;width:100%;max-width:500px}
+  .browser-frame{background:#0a0a0a;border-radius:12px;border:1px solid rgba(232,201,122,.18);overflow:hidden;box-shadow:0 40px 100px rgba(0,0,0,.8),0 0 0 1px rgba(232,201,122,.04),0 0 60px rgba(232,201,122,.06);animation:flt 6s ease-in-out infinite}
+  @keyframes flt{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+  .browser-bar{background:#111;padding:10px 14px;display:flex;align-items:center;gap:8px;border-bottom:1px solid rgba(232,201,122,.1)}
+  .b-dots{display:flex;gap:5px}
+  .b-dot{width:9px;height:9px;border-radius:50%}
+  .b-dot.r{background:rgba(255,95,87,.6)}.b-dot.y{background:rgba(255,189,46,.6)}.b-dot.g{background:rgba(39,201,63,.6)}
+  .b-url{flex:1;background:rgba(255,255,255,.04);border:1px solid rgba(232,201,122,.1);border-radius:4px;padding:3px 10px;font-size:8px;color:rgba(245,240,232,.3);letter-spacing:.06em;text-align:center}
+
+  /* Mini website preview inside browser */
+  .preview-site{width:100%;background:#0A0A0A;overflow:hidden}
+  .ps-nav{background:rgba(10,10,10,.98);padding:10px 14px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid rgba(201,168,76,.12)}
+  .ps-logo-en{font-family:'Playfair Display',serif;font-size:11px;color:#C9A84C;letter-spacing:.04em}
+  .ps-logo-ar{font-family:'Cairo',sans-serif;font-size:8px;color:rgba(201,168,76,.5)}
+  .ps-links{display:flex;gap:10px}
+  .ps-link{font-size:6px;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.4)}
+  .ps-reserve{font-size:6px;letter-spacing:.08em;text-transform:uppercase;color:#C9A84C;border:1px solid rgba(201,168,76,.4);padding:3px 7px}
+
+  .ps-hero{height:180px;background:linear-gradient(160deg,#0a0a0a,#1a1505);position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:6px}
+  .ps-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 50% 50%,rgba(201,168,76,.1) 0%,transparent 70%)}
+  .ps-hero-pattern{position:absolute;inset:0;opacity:.04;background-image:url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23C9A84C' fill-opacity='1'%3E%3Cpath d='M20 0l5.77 10H14.23L20 0zm0 40l-5.77-10h11.54L20 40zM0 20l10-5.77V25.77L0 20zm40 0l-10 5.77V14.23L40 20z'/%3E%3C/g%3E%3C/svg%3E")}
+  .ps-hero-divider{position:absolute;top:0;left:50%;width:1px;height:30px;background:linear-gradient(to bottom,transparent,#C9A84C);transform:translateX(-50%)}
+  .ps-arabic{font-family:'Cairo',sans-serif;font-size:22px;font-weight:700;color:#C9A84C;line-height:1;position:relative;z-index:1}
+  .ps-en{font-family:'Playfair Display',serif;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:rgba(245,240,232,.8);position:relative;z-index:1}
+  .ps-line{width:40px;height:1px;background:#C9A84C;position:relative;z-index:1}
+  .ps-tagline{font-size:5.5px;color:rgba(255,255,255,.35);letter-spacing:.06em;position:relative;z-index:1}
+  .ps-cta{background:#C9A84C;color:#0a0a0a;font-size:5.5px;letter-spacing:.12em;text-transform:uppercase;padding:4px 10px;position:relative;z-index:1}
+
+  .ps-menu-strip{background:#111;padding:8px 14px;display:flex;gap:6px;border-bottom:1px solid rgba(201,168,76,.08);border-top:1px solid rgba(201,168,76,.08)}
+  .ps-tab{font-size:5.5px;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.3);padding:3px 7px;background:none;border:1px solid transparent}
+  .ps-tab.a{color:#C9A84C;border-color:rgba(201,168,76,.3);background:rgba(201,168,76,.06)}
+
+  .ps-cards{display:grid;grid-template-columns:1fr 1fr 1fr;gap:4px;padding:8px 10px;background:#0A0A0A}
+  .ps-card{background:#111;border:1px solid rgba(201,168,76,.08);overflow:hidden;border-radius:3px}
+  .ps-card-img{height:40px;position:relative;overflow:hidden}
+  .ps-card-img::before{content:'';position:absolute;inset:0}
+  .ps-c1{background:linear-gradient(145deg,#1a0a00,#2d1500)}.ps-c1::before{background:radial-gradient(ellipse at 50% 60%,rgba(180,80,20,.4) 0%,transparent 60%)}
+  .ps-c2{background:linear-gradient(145deg,#1a1505,#2a2010)}.ps-c2::before{background:radial-gradient(ellipse at 60% 50%,rgba(201,168,76,.3) 0%,transparent 55%)}
+  .ps-c3{background:linear-gradient(145deg,#150800,#251200)}.ps-c3::before{background:radial-gradient(ellipse at 45% 55%,rgba(200,60,10,.35) 0%,transparent 55%)}
+  .ps-card-icon{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:14px;opacity:.7}
+  .ps-card-body{padding:4px 5px}
+  .ps-card-name{font-size:5.5px;color:rgba(245,240,232,.8);font-weight:500;margin-bottom:1px}
+  .ps-card-ar{font-family:'Cairo',sans-serif;font-size:5px;color:rgba(201,168,76,.5);direction:rtl}
+  .ps-card-price{font-size:6px;color:#C9A84C;font-weight:600;margin-top:2px}
+  .ps-tag{position:absolute;top:3px;left:3px;background:#C9A84C;color:#0a0a0a;font-size:4px;padding:1px 4px;letter-spacing:.06em;text-transform:uppercase}
+
+  .ps-footer{background:#111;padding:8px 14px;display:flex;justify-content:space-between;align-items:center;border-top:1px solid rgba(201,168,76,.1)}
+  .ps-footer-brand{font-family:'Cairo',sans-serif;font-size:10px;color:rgba(201,168,76,.6)}
+  .ps-footer-copy{font-size:5px;color:rgba(255,255,255,.2);letter-spacing:.04em}
+
+  /* Floating accent card */
+  .accent-card{position:absolute;bottom:-20px;right:-20px;background:#0e0e0e;border:1px solid rgba(232,201,122,.2);padding:1rem 1.2rem;min-width:160px;z-index:10;box-shadow:0 20px 50px rgba(0,0,0,.6)}
+  .ac-label{font-size:.55rem;letter-spacing:.2em;color:var(--text-faint);text-transform:uppercase;margin-bottom:.5rem}
+  .ac-value{font-family:'Syne',sans-serif;font-size:1.6rem;font-weight:800;color:var(--accent);line-height:1;text-shadow:0 0 20px rgba(232,201,122,.3)}
+  .ac-sub{font-size:.58rem;color:var(--text-faint);margin-top:.2rem}
+  body.ar .ac-label,.ac-sub{font-family:'Cairo',sans-serif;letter-spacing:0}
+
+  /* DIVIDER */
+  .divider{position:relative;z-index:1;display:flex;align-items:center;gap:1rem;padding:0 5%;margin-bottom:4rem}
+  .divider::before,.divider::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,transparent,rgba(232,201,122,.14),transparent)}
+  .divider-text{font-size:.6rem;letter-spacing:.2em;color:var(--text-faint);text-transform:uppercase;white-space:nowrap}
+  body.ar .divider-text{font-family:'Cairo',sans-serif;letter-spacing:0}
+
+  /* SECTIONS */
+  .section{position:relative;z-index:1;padding:0 5% 5rem}
+  .section-label{font-size:.65rem;letter-spacing:.2em;color:var(--accent);text-transform:uppercase;margin-bottom:2.5rem;display:flex;align-items:center;gap:1rem}
+  .section-label::after{content:'';flex:1;max-width:55px;height:1px;background:var(--accent);opacity:.3}
+  body.ar .section-label{font-family:'Cairo',sans-serif;letter-spacing:0;flex-direction:row-reverse}
+  body.ar .section-label::after{order:-1}
+
+  /* STATS */
+  .stats-row{display:flex;gap:0;border:1px solid var(--card-border);background:var(--card-border);flex-wrap:wrap}
+  .stat-box{flex:1;min-width:140px;background:var(--bg);padding:2rem 1.5rem;text-align:center}
+  .stat-number{font-family:'Syne',sans-serif;font-size:2.6rem;font-weight:800;color:var(--accent);line-height:1;letter-spacing:-.02em;margin-bottom:.5rem;text-shadow:0 0 25px rgba(232,201,122,.28)}
+  body.ar .stat-number{font-family:'Cairo',sans-serif}
+  .stat-label{font-size:.62rem;letter-spacing:.15em;color:var(--text-faint);text-transform:uppercase}
+  body.ar .stat-label{font-family:'Cairo',sans-serif;letter-spacing:0;font-size:.78rem}
+
+  /* DEMO LAUNCH */
+  .demo-launch{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1.8rem;padding:4.5rem 2rem;border:1px solid var(--card-border);border-top:2px solid var(--accent);background:var(--card-bg);text-align:center;position:relative;overflow:hidden}
+  .demo-launch::before{content:'';position:absolute;inset:0;background-image:url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23E8C97A' fill-opacity='0.018'%3E%3Cpath d='M20 0l5.77 10H14.23L20 0zm0 40l-5.77-10h11.54L20 40zM0 20l10-5.77V25.77L0 20zm40 0l-10 5.77V14.23L40 20z'/%3E%3C/g%3E%3C/svg%3E");pointer-events:none}
+  .demo-launch-icon{width:68px;height:68px;border:1px solid rgba(232,201,122,.25);background:rgba(232,201,122,.05);display:flex;align-items:center;justify-content:center;color:var(--accent);font-size:1.5rem;position:relative;z-index:1}
+  .demo-launch-label{font-size:.58rem;letter-spacing:.22em;color:var(--text-faint);text-transform:uppercase;margin-bottom:.3rem;position:relative;z-index:1}
+  body.ar .demo-launch-label{font-family:'Cairo',sans-serif;letter-spacing:0}
+  .demo-launch-text{font-size:.75rem;color:var(--text-muted);letter-spacing:.04em;line-height:1.85;max-width:380px;position:relative;z-index:1}
+  body.ar .demo-launch-text{font-family:'Cairo',sans-serif;font-size:.9rem;letter-spacing:0}
+  .demo-launch-btn{display:inline-flex;align-items:center;gap:.65rem;font-family:'Space Mono',monospace;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:#050508;background:var(--accent);text-decoration:none;padding:1rem 2.4rem;font-weight:700;transition:all .3s;position:relative;z-index:1}
+  .demo-launch-btn:hover{background:#fff;box-shadow:0 0 36px var(--accent-glow);transform:translateY(-1px)}
+  body.ar .demo-launch-btn{font-family:'Cairo',sans-serif;font-size:.9rem;letter-spacing:0}
+  .demo-launch-hint{font-size:.6rem;color:var(--text-faint);letter-spacing:.08em;position:relative;z-index:1}
+  body.ar .demo-launch-hint{font-family:'Cairo',sans-serif;letter-spacing:0;font-size:.72rem}
+
+  /* FEATURES */
+  .features-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:1px;border:1px solid var(--card-border);background:var(--card-border)}
+  .feature-item{background:var(--bg);padding:1.8rem 1.6rem;transition:background .3s}
+  .feature-item:hover{background:rgba(255,255,255,.025)}
+  .fi-icon{width:38px;height:38px;border:1px solid rgba(232,201,122,.2);background:rgba(232,201,122,.05);display:flex;align-items:center;justify-content:center;margin-bottom:1rem;color:var(--accent);font-size:.88rem}
+  .feature-name{font-family:'Syne',sans-serif;font-size:.9rem;font-weight:700;color:var(--text);margin-bottom:.45rem}
+  body.ar .feature-name{font-family:'Cairo',sans-serif}
+  .feature-desc{font-size:.72rem;color:var(--text-muted);line-height:1.75}
+  body.ar .feature-desc{font-family:'Cairo',sans-serif;font-size:.82rem}
+
+  /* TECH */
+  .tech-row{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:2rem}
+  .tech-pill{display:flex;align-items:center;gap:.55rem;background:var(--card-bg);border:1px solid var(--card-border);padding:.58rem 1.1rem;font-size:.7rem;letter-spacing:.06em;color:var(--text-muted);transition:border-color .2s,color .2s}
+  .tech-pill:hover{border-color:rgba(232,201,122,.28);color:var(--text)}
+  .tech-pill i{color:var(--accent);font-size:.82rem}
+  body.ar .tech-pill{font-family:'Cairo',sans-serif;letter-spacing:0}
+
+  /* FOOTER */
+  .project-footer{position:relative;z-index:1;border-top:1px solid rgba(255,255,255,.05);padding:2rem 5%;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+  .footer-logo{font-size:.8rem;color:var(--text-muted)}
+  .footer-logo span{color:var(--accent)}
+  .btn-back{display:inline-flex;align-items:center;gap:.5rem;font-family:'Space Mono',monospace;font-size:.64rem;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;padding:.7rem 1.4rem;background:transparent;color:var(--text-muted);border:1px solid rgba(255,255,255,.1);transition:all .3s}
+  body.ar .btn-back{font-family:'Cairo',sans-serif;letter-spacing:0}
+  .btn-back:hover{border-color:var(--accent);color:var(--accent)}
+
+  /* ANIMATIONS */
+  @keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+  @keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
+  .fade-in{opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s ease}
+  .fade-in.visible{opacity:1;transform:translateY(0)}
+  .fd1{transition-delay:.1s}.fd2{transition-delay:.2s}.fd3{transition-delay:.3s}
+  .fd4{transition-delay:.4s}.fd5{transition-delay:.5s}.fd6{transition-delay:.6s}
+
+  @media(max-width:900px){.project-hero{grid-template-columns:1fr;gap:3rem;padding-top:calc(var(--nav-h) + 3rem)}.hero-right{height:auto}.accent-card{display:none}}
+  @media(max-width:600px){.stats-row{flex-direction:column}.hero-ctas{flex-direction:column}}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="../index.html"><span>Nuvarix</span><span>.agency</span></a>
+  <div class="nav-right">
+    <button class="lang-btn" onclick="toggleLang()">
+      <i class="fa-solid fa-globe"></i>
+      <span id="lang-label">العربية</span>
+    </button>
+    <a class="nav-back" href="../index.html#projects">
+      <i class="fa-solid fa-arrow-left" id="back-icon"></i>
+      <span data-en="Projects" data-ar="المشاريع">Projects</span>
+    </a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="project-hero">
+  <div class="hero-left">
+    <p class="breadcrumb"><span data-en="Projects" data-ar="المشاريع">Projects</span> / <span style="color:var(--accent)">Dar Zitoun</span></p>
+    <div class="project-type-tag" data-en="Fine Dining Website" data-ar="موقع مطعم فاخر">Fine Dining Website</div>
+    <h1 class="project-title">Dar<br>Zitoun</h1>
+    <p class="project-title-ar">دار الزيتون</p>
+    <p class="project-desc-hero"
+      data-en="A premium restaurant website for an Algerian fine dining experience. Full-page sections with animated reveals, a live reservation form, bilingual content, and an immersive arabesque aesthetic — built to feel like luxury from the first scroll."
+      data-ar="موقع مطعم فاخر لتجربة طعام جزائرية راقية. أقسام بملء الشاشة مع ظهور متحرك، نموذج حجز مباشر، محتوى ثنائي اللغة، وجماليات أرابيسك آسرة — مصمم ليشعر بالفخامة من أول تمرير.">A premium restaurant website for an Algerian fine dining experience. Full-page sections with animated reveals, a live reservation form, bilingual content, and an immersive arabesque aesthetic — built to feel like luxury from the first scroll.</p>
+    <div class="hero-meta">
+      <div><div class="meta-label" data-en="Client" data-ar="العميل">Client</div><div class="meta-value">Dar Zitoun DZ</div></div>
+      <div><div class="meta-label" data-en="Type" data-ar="النوع">Type</div><div class="meta-value" data-en="Website" data-ar="موقع ويب">Website</div></div>
+      <div><div class="meta-label" data-en="Year" data-ar="السنة">Year</div><div class="meta-value">2026</div></div>
+    </div>
+    <div class="hero-ctas">
+      <a href="#live-demo" class="btn btn-primary"><i class="fa-solid fa-play"></i><span data-en="Live Demo" data-ar="تجربة مباشرة">Live Demo</span></a>
+      <a href="../index.html#projects" class="btn btn-outline"><i class="fa-solid fa-arrow-left" id="cta-back-icon"></i><span data-en="All Projects" data-ar="كل المشاريع">All Projects</span></a>
+    </div>
+    <div class="hero-tags">
+      <span class="tag">HTML/CSS</span><span class="tag">JS</span>
+      <span class="tag">Bilingual</span><span class="tag">Fine Dining</span><span class="tag">Responsive</span>
+    </div>
+  </div>
+
+  <!-- Browser Mockup -->
+  <div class="hero-right">
+    <div class="browser-wrap">
+      <div class="browser-frame">
+        <div class="browser-bar">
+          <div class="b-dots"><div class="b-dot r"></div><div class="b-dot y"></div><div class="b-dot g"></div></div>
+          <div class="b-url">darzitoun.dz</div>
+        </div>
+        <!-- Mini site preview -->
+        <div class="preview-site">
+          <div class="ps-nav">
+            <div>
+              <div class="ps-logo-en">Dar Zitoun</div>
+              <div class="ps-logo-ar">دار الزيتون</div>
+            </div>
+            <div class="ps-links">
+              <span class="ps-link">About</span>
+              <span class="ps-link">Menu</span>
+              <span class="ps-link">Gallery</span>
+            </div>
+            <div class="ps-reserve">Reserve</div>
+          </div>
+          <div class="ps-hero">
+            <div class="ps-hero-pattern"></div>
+            <div class="ps-hero-divider"></div>
+            <div class="ps-arabic">دار الزيتون</div>
+            <div class="ps-en">Dar Zitoun</div>
+            <div class="ps-line"></div>
+            <div class="ps-tagline">Where Algerian Heritage Meets Refined Elegance</div>
+            <div class="ps-cta">Reserve a Table</div>
+          </div>
+          <div class="ps-menu-strip">
+            <div class="ps-tab a">All</div>
+            <div class="ps-tab">Starters</div>
+            <div class="ps-tab">Mains</div>
+            <div class="ps-tab">Desserts</div>
+          </div>
+          <div class="ps-cards">
+            <div class="ps-card">
+              <div class="ps-card-img ps-c1"><div class="ps-card-icon">🍲</div><span class="ps-tag">Signature</span></div>
+              <div class="ps-card-body">
+                <div class="ps-card-name">Chorba Frik</div>
+                <div class="ps-card-ar">شوربة فريك</div>
+                <div class="ps-card-price">1 200 DZD</div>
+              </div>
+            </div>
+            <div class="ps-card">
+              <div class="ps-card-img ps-c2"><div class="ps-card-icon">🫕</div><span class="ps-tag">Chef's Pride</span></div>
+              <div class="ps-card-body">
+                <div class="ps-card-name">Couscous Royal</div>
+                <div class="ps-card-ar">كسكسي ملكي</div>
+                <div class="ps-card-price">2 400 DZD</div>
+              </div>
+            </div>
+            <div class="ps-card">
+              <div class="ps-card-img ps-c3"><div class="ps-card-icon">🥩</div><span class="ps-tag">Wood Fire</span></div>
+              <div class="ps-card-body">
+                <div class="ps-card-name">Mechoui</div>
+                <div class="ps-card-ar">مشوي الخروف</div>
+                <div class="ps-card-price">3 800 DZD</div>
+              </div>
+            </div>
+          </div>
+          <div class="ps-footer">
+            <div class="ps-footer-brand">دار الزيتون</div>
+            <div class="ps-footer-copy">© 2026 Dar Zitoun · Algiers</div>
+          </div>
+        </div>
+      </div>
+      <!-- Floating stat card -->
+      <div class="accent-card">
+        <div class="ac-label" data-en="Est." data-ar="تأسس">Est.</div>
+        <div class="ac-value">2008</div>
+        <div class="ac-sub" data-en="Algiers, Algeria" data-ar="الجزائر العاصمة">Algiers, Algeria</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"><span class="divider-text" data-en="Project Details" data-ar="تفاصيل المشروع">Project Details</span></div>
+
+<!-- STATS -->
+<div class="section" style="margin-bottom:1rem">
+  <div class="stats-row fade-in">
+    <div class="stat-box"><div class="stat-number">6</div><div class="stat-label" data-en="Sections" data-ar="قسم">Sections</div></div>
+    <div class="stat-box"><div class="stat-number">5</div><div class="stat-label" data-en="Menu Items" data-ar="طبق">Menu Items</div></div>
+    <div class="stat-box"><div class="stat-number">100%</div><div class="stat-label" data-en="Responsive" data-ar="متجاوب">Responsive</div></div>
+    <div class="stat-box"><div class="stat-number">2</div><div class="stat-label" data-en="Languages" data-ar="لغتان">Languages</div></div>
+  </div>
+</div>
+
+<!-- LIVE DEMO -->
+<div class="section fade-in" id="live-demo">
+  <p class="section-label">
+    <i class="fa-solid fa-circle" style="font-size:.45rem;animation:blink 1.2s ease-in-out infinite"></i>
+    <span data-en="Live Demo" data-ar="تجربة مباشرة">Live Demo</span>
+  </p>
+  <div class="demo-launch">
+    <div class="demo-launch-icon"><i class="fa-solid fa-globe"></i></div>
+    <div>
+      <p class="demo-launch-label" data-en="Full Website Preview" data-ar="معاينة الموقع كاملاً">Full Website Preview</p>
+    </div>
+    <p class="demo-launch-text"
+      data-en="Explore the full Dar Zitoun website — scroll through sections, browse the menu, view the gallery, and try the reservation form."
+      data-ar="استكشف موقع دار الزيتون كاملاً — تصفح الأقسام، اطلع على القائمة والمعرض، وجرّب نموذج الحجز.">Explore the full Dar Zitoun website — scroll through sections, browse the menu, view the gallery, and try the reservation form.</p>
+    <a href="https://1darzitoun.netlify.app/" target="_blank" class="demo-launch-btn">
+      <i class="fa-solid fa-arrow-up-right-from-square"></i>
+      <span data-en="Open Live Demo" data-ar="فتح العرض المباشر">Open Live Demo</span>
+    </a>
+    <p class="demo-launch-hint" data-en="Opens in a new tab" data-ar="يفتح في تاب جديد">Opens in a new tab</p>
+  </div>
+</div>
+
+<!-- FEATURES -->
+<div class="section">
+  <p class="section-label"><span data-en="Key Features" data-ar="الميزات الرئيسية">Key Features</span></p>
+  <div class="features-grid">
+    <div class="feature-item fade-in fd1">
+      <div class="fi-icon"><i class="fa-solid fa-scroll"></i></div>
+      <div class="feature-name" data-en="Scroll Animations" data-ar="رسوم التمرير">Scroll Animations</div>
+      <div class="feature-desc" data-en="Every section reveals with elegant fade-up transitions triggered on scroll using IntersectionObserver." data-ar="كل قسم يظهر بانتقالات أنيقة عند التمرير باستخدام IntersectionObserver.">Every section reveals with elegant fade-up transitions triggered on scroll using IntersectionObserver.</div>
+    </div>
+    <div class="feature-item fade-in fd2">
+      <div class="fi-icon"><i class="fa-solid fa-utensils"></i></div>
+      <div class="feature-name" data-en="Interactive Menu" data-ar="قائمة تفاعلية">Interactive Menu</div>
+      <div class="feature-desc" data-en="Tabbed menu with category filtering (Starters, Mains, Desserts) and bilingual dish names." data-ar="قائمة بتبويبات مع تصفية بالفئات ومسميات الأطباق بالعربية والإنجليزية.">Tabbed menu with category filtering and bilingual dish names.</div>
+    </div>
+    <div class="feature-item fade-in fd3">
+      <div class="fi-icon"><i class="fa-solid fa-calendar-check"></i></div>
+      <div class="feature-name" data-en="Reservation Form" data-ar="نموذج الحجز">Reservation Form</div>
+      <div class="feature-desc" data-en="Full reservation system with date validation, guest count, time slots, and toast confirmation." data-ar="نظام حجز متكامل مع التحقق من التاريخ وعدد الضيوف والأوقات المتاحة.">Full reservation system with date validation, guest count, time slots and toast confirmation.</div>
+    </div>
+    <div class="feature-item fade-in fd4">
+      <div class="fi-icon"><i class="fa-solid fa-images"></i></div>
+      <div class="feature-name" data-en="Masonry Gallery" data-ar="معرض مُتدرّج">Masonry Gallery</div>
+      <div class="feature-desc" data-en="CSS multi-column masonry layout with hover label reveals and a gold overlay effect." data-ar="تخطيط متعدد الأعمدة مع كشف تسميات عند التمرير وتأثير تراكب ذهبي.">CSS multi-column masonry layout with hover label reveals and a gold overlay effect.</div>
+    </div>
+    <div class="feature-item fade-in fd5">
+      <div class="fi-icon"><i class="fa-solid fa-language"></i></div>
+      <div class="feature-name" data-en="Bilingual Content" data-ar="محتوى ثنائي اللغة">Bilingual Content</div>
+      <div class="feature-desc" data-en="Arabic and English throughout — product names, descriptions, and navigation with RTL support." data-ar="العربية والإنجليزية في كل مكان — أسماء الأطباق، الأوصاف، والتنقل مع دعم RTL.">Arabic and English throughout — with RTL support baked in.</div>
+    </div>
+    <div class="feature-item fade-in fd6">
+      <div class="fi-icon"><i class="fa-solid fa-mobile-screen-button"></i></div>
+      <div class="feature-name" data-en="Fully Responsive" data-ar="متجاوب بالكامل">Fully Responsive</div>
+      <div class="feature-desc" data-en="Mobile-first grid collapses, hamburger navigation, and fluid typography across all screen sizes." data-ar="تصميم متجاوب للهاتف مع تنقل hamburger وخطوط طبيعية على كل الأحجام.">Mobile-first layout collapses, hamburger navigation, fluid typography on all screens.</div>
+    </div>
+  </div>
+</div>
+
+<!-- TECH -->
+<div class="section" style="padding-top:0">
+  <p class="section-label"><span data-en="Tech Stack" data-ar="التقنيات المستخدمة">Tech Stack</span></p>
+  <div class="tech-row fade-in">
+    <div class="tech-pill"><i class="fa-brands fa-html5"></i> HTML5</div>
+    <div class="tech-pill"><i class="fa-brands fa-css3-alt"></i> Vanilla CSS</div>
+    <div class="tech-pill"><i class="fa-brands fa-js"></i> Vanilla JS</div>
+    <div class="tech-pill"><i class="fa-brands fa-google"></i> Google Fonts</div>
+    <div class="tech-pill"><i class="fa-solid fa-map-location-dot"></i> Google Maps</div>
+    <div class="tech-pill"><i class="fa-solid fa-language"></i> <span data-en="Bilingual" data-ar="ثنائي اللغة">Bilingual</span></div>
+  </div>
+</div>
+
+<footer class="project-footer">
+  <div class="footer-logo"><span>Nuvarix</span>.agency</div>
+  <a href="index.html#projects" class="btn-back">
+    <i class="fa-solid fa-arrow-left" id="footer-icon"></i>
+    <span data-en="Back to Projects" data-ar="العودة للمشاريع">Back to Projects</span>
+  </a>
+</footer>
+
+<script>
+  let lang = 'en';
+
+  function toggleLang() {
+    lang = lang === 'en' ? 'ar' : 'en';
+    const isAr = lang === 'ar';
+    document.body.classList.toggle('ar', isAr);
+    document.documentElement.lang = lang;
+    document.documentElement.dir = isAr ? 'rtl' : 'ltr';
+    document.getElementById('lang-label').textContent = isAr ? 'English' : 'العربية';
+    const arrowCls = isAr ? 'fa-arrow-right' : 'fa-arrow-left';
+    ['back-icon','cta-back-icon','footer-icon'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.className = 'fa-solid ' + arrowCls;
+    });
+    document.querySelectorAll('[data-en]').forEach(el => {
+      const v = isAr ? el.getAttribute('data-ar') : el.getAttribute('data-en');
+      if (v) el.textContent = v;
+    });
+  }
+
+  // Scroll observer
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>

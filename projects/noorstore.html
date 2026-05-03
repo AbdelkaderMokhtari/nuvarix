@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Noor Store — Nuvarix Project</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;700;800&family=Playfair+Display:ital,wght@0,400;1,400&family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+  :root {
+    --bg:#050508;--accent:#00D4FF;--accent-dim:rgba(0,212,255,.1);
+    --accent-glow:rgba(0,212,255,.35);--text:#F0F4FF;
+    --text-muted:rgba(240,244,255,.55);--text-faint:rgba(240,244,255,.28);
+    --card-bg:rgba(255,255,255,.03);--card-border:rgba(255,255,255,.07);
+    --gold:#E8C9A0;--gold2:#c9a97a;--nav-h:70px;
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--text);font-family:'Space Mono',monospace;overflow-x:hidden;line-height:1.6}
+  body.ar{font-family:'Cairo',sans-serif;direction:rtl}
+  body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(0,212,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(0,212,255,.025) 1px,transparent 1px);background-size:60px 60px;pointer-events:none;z-index:0}
+
+  /* NAV */
+  nav{position:fixed;top:0;left:0;right:0;height:var(--nav-h);display:flex;align-items:center;justify-content:space-between;padding:0 5%;z-index:100;background:rgba(5,5,8,.9);backdrop-filter:blur(16px);border-bottom:1px solid rgba(0,212,255,.08)}
+  .nav-logo{font-family:'Space Mono',monospace;font-size:1rem;font-weight:700;text-decoration:none;letter-spacing:.05em}
+  .nav-logo span:first-child{color:var(--accent)}
+  .nav-logo span:last-child{color:var(--text-faint)}
+  .nav-right{display:flex;align-items:center;gap:1.2rem}
+  .lang-btn{display:flex;align-items:center;gap:.4rem;background:var(--card-bg);border:1px solid var(--card-border);color:var(--text-muted);font-family:'Space Mono',monospace;font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;padding:.38rem .85rem;cursor:pointer;transition:all .2s}
+  .lang-btn:hover{border-color:var(--accent);color:var(--accent)}
+  body.ar .lang-btn{font-family:'Cairo',sans-serif;letter-spacing:0}
+  .nav-back{display:flex;align-items:center;gap:.45rem;color:var(--text-muted);text-decoration:none;font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;transition:color .2s}
+  .nav-back:hover{color:var(--accent)}
+  body.ar .nav-back{font-family:'Cairo',sans-serif;letter-spacing:0}
+
+  /* HERO */
+  .project-hero{position:relative;z-index:1;padding:calc(var(--nav-h) + 5rem) 5% 5rem;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;min-height:100vh}
+  .breadcrumb{font-size:.62rem;letter-spacing:.2em;color:var(--text-faint);text-transform:uppercase;margin-bottom:1.2rem;opacity:0;animation:fadeUp .7s .1s forwards}
+  .breadcrumb span{color:var(--accent)}
+  .project-type-tag{display:inline-block;font-size:.62rem;letter-spacing:.14em;color:var(--accent);border:1px solid rgba(0,212,255,.3);padding:.28rem .8rem;margin-bottom:1.4rem;background:rgba(0,212,255,.04);opacity:0;animation:fadeUp .7s .2s forwards}
+  .project-title{font-family:'Syne',sans-serif;font-size:clamp(3.2rem,6vw,5.5rem);font-weight:800;line-height:1;letter-spacing:-.02em;margin-bottom:.4rem;opacity:0;animation:fadeUp .7s .3s forwards}
+  body.ar .project-title{font-family:'Cairo',sans-serif}
+  .project-title-ar{font-family:'Playfair Display',serif;font-style:italic;font-size:1.4rem;color:var(--gold);margin-bottom:2rem;opacity:0;animation:fadeUp .7s .4s forwards}
+  body.ar .project-title-ar{font-family:'Cairo',sans-serif;font-style:normal;font-size:1.15rem}
+  .project-desc-hero{font-size:.8rem;color:var(--text-muted);line-height:1.9;margin-bottom:2.2rem;max-width:480px;opacity:0;animation:fadeUp .7s .5s forwards}
+  body.ar .project-desc-hero{font-family:'Cairo',sans-serif;font-size:.9rem}
+  .hero-meta{display:flex;gap:2rem;flex-wrap:wrap;margin-bottom:2.2rem;opacity:0;animation:fadeUp .7s .6s forwards}
+  .meta-label{font-size:.58rem;letter-spacing:.2em;color:var(--text-faint);text-transform:uppercase;margin-bottom:.3rem}
+  .meta-value{font-size:.78rem;color:var(--text)}
+  body.ar .meta-label,body.ar .meta-value{font-family:'Cairo',sans-serif;letter-spacing:0}
+  .hero-ctas{display:flex;gap:.8rem;flex-wrap:wrap;margin-bottom:2rem;opacity:0;animation:fadeUp .7s .65s forwards}
+  .btn{display:inline-flex;align-items:center;gap:.5rem;font-family:'Space Mono',monospace;font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;padding:.8rem 1.6rem;transition:all .3s;cursor:pointer;border:none}
+  body.ar .btn{font-family:'Cairo',sans-serif;font-size:.82rem;letter-spacing:0}
+  .btn-primary{background:var(--accent);color:#050508;font-weight:700}
+  .btn-primary:hover{background:#fff;box-shadow:0 0 28px var(--accent-glow)}
+  .btn-outline{background:transparent;color:var(--text);border:1px solid rgba(240,244,255,.18)}
+  .btn-outline:hover{border-color:var(--accent);color:var(--accent)}
+  .hero-tags{display:flex;gap:.42rem;flex-wrap:wrap;opacity:0;animation:fadeUp .7s .7s forwards}
+  .tag{font-size:.6rem;letter-spacing:.1em;color:var(--accent);border:1px solid rgba(0,212,255,.22);padding:.28rem .7rem;background:rgba(0,212,255,.04);text-transform:uppercase}
+
+  /* PHONES */
+  .hero-right{position:relative;display:flex;justify-content:center;align-items:center;height:600px;opacity:0;animation:fadeUp .9s .4s forwards}
+  .phone-wrap{position:absolute}
+  .phone-wrap.main{z-index:3;animation:flt1 6s ease-in-out infinite}
+  .phone-wrap.left{z-index:2;transform:translateX(-130px) rotate(-8deg) scale(.87);animation:flt2 7s ease-in-out .5s infinite}
+  .phone-wrap.right{z-index:2;transform:translateX(130px) rotate(8deg) scale(.87);animation:flt3 5.5s ease-in-out 1s infinite}
+  .phone-wrap:hover{z-index:10;animation:none;transform:scale(1.04) !important}
+  .phone-frame{width:230px;background:#0e0c0a;border-radius:36px;border:2px solid rgba(232,201,160,.18);overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.65),0 0 0 1px rgba(232,201,160,.04);position:relative}
+  .phone-frame::before{content:'';position:absolute;top:12px;left:50%;transform:translateX(-50%);width:58px;height:5px;background:rgba(255,255,255,.1);border-radius:10px;z-index:10}
+  .phone-glow{position:absolute;width:280px;height:280px;border-radius:50%;background:radial-gradient(circle,rgba(232,201,160,.07) 0%,transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none}
+  @keyframes flt1{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+  @keyframes flt2{0%,100%{transform:translateX(-130px) rotate(-8deg) scale(.87)}50%{transform:translateX(-130px) rotate(-8deg) scale(.87) translateY(-7px)}}
+  @keyframes flt3{0%,100%{transform:translateX(130px) rotate(8deg) scale(.87)}50%{transform:translateX(130px) rotate(8deg) scale(.87) translateY(-7px)}}
+
+  /* SCREEN STYLES */
+  .screen{width:100%;font-size:10px;overflow:hidden}
+  .s1-header{background:rgba(14,12,10,.97);padding:16px 14px 10px;border-bottom:1px solid rgba(232,201,160,.1)}
+  .s1-logo-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+  .s1-logo{font-size:13px;font-weight:700;color:#f0ebe3;letter-spacing:.04em}
+  .s1-logo-dot{display:inline-block;width:4px;height:4px;border-radius:50%;background:#E8C9A0;margin:0 2px;vertical-align:middle}
+  .s1-logo-sub{font-size:7px;color:#E8C9A0;letter-spacing:.2em;display:block}
+  .s1-cart-btn{width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,.06);border:1px solid rgba(232,201,160,.2);display:flex;align-items:center;justify-content:center;color:#f0ebe3;font-size:11px}
+  .s1-search{background:rgba(30,27,23,.8);border:1px solid rgba(232,201,160,.1);border-radius:8px;padding:5px 8px;font-size:7.5px;color:rgba(240,235,227,.35);display:flex;align-items:center;gap:4px}
+  .s1-cats{display:flex;background:rgba(14,12,10,.95);border-bottom:1px solid rgba(232,201,160,.08);padding:0 10px}
+  .s1-cat{padding:7px 8px;font-size:7px;color:rgba(240,235,227,.35);border-bottom:2px solid transparent;white-space:nowrap}
+  .s1-cat.active{color:#E8C9A0;border-bottom-color:#E8C9A0}
+  .s1-body{padding:10px;background:#0e0c0a}
+  .s1-meta{font-size:7px;color:rgba(240,235,227,.3);letter-spacing:.1em;text-transform:uppercase;margin-bottom:8px}
+  .s1-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+  .s1-card{background:rgba(255,255,255,.04);border-radius:10px;border:1px solid rgba(232,201,160,.08);overflow:hidden}
+  .s1-card-img{height:68px;display:flex;align-items:center;justify-content:center;font-size:24px;position:relative}
+  .s1-sale-badge{position:absolute;top:5px;left:5px;background:#e05555;color:#fff;font-size:5px;font-weight:700;padding:1px 5px;border-radius:10px}
+  .s1-card-body{padding:6px 7px 7px}
+  .s1-name-ar{font-size:6.5px;color:#c9a97a;font-style:italic;margin-bottom:1px}
+  .s1-name-en{font-size:7.5px;color:#f0ebe3;font-weight:500;margin-bottom:5px}
+  .s1-footer{display:flex;justify-content:space-between;align-items:center}
+  .s1-price{font-size:8px;font-weight:600;color:#E8C9A0}
+  .s1-price-sale{font-size:8px;font-weight:600;color:#e05555}
+  .s1-price-old{font-size:6px;color:rgba(240,235,227,.3);text-decoration:line-through}
+  .s1-add{width:20px;height:20px;border-radius:6px;background:#E8C9A0;color:#2a1a05;font-size:13px;display:flex;align-items:center;justify-content:center}
+  .s2-bg{background:#0e0c0a}
+  .s2-img{height:150px;display:flex;align-items:center;justify-content:center;font-size:48px;position:relative;overflow:hidden}
+  .s2-img::after{content:'';position:absolute;bottom:0;left:0;right:0;height:50px;background:linear-gradient(to top,#161410,transparent)}
+  .s2-close{position:absolute;top:10px;right:10px;width:22px;height:22px;border-radius:50%;background:rgba(0,0,0,.5);color:#f0ebe3;font-size:12px;display:flex;align-items:center;justify-content:center;border:1px solid rgba(232,201,160,.2)}
+  .s2-body{padding:12px 14px 18px}
+  .s2-ar{font-size:8px;color:#c9a97a;font-style:italic;margin-bottom:3px}
+  .s2-en{font-size:14px;font-weight:600;color:#f0ebe3;margin-bottom:7px}
+  .s2-price{font-size:14px;font-weight:600;color:#E8C9A0;margin-bottom:9px}
+  .s2-desc{font-size:6.5px;color:rgba(240,235,227,.5);line-height:1.7;margin-bottom:10px;padding-bottom:10px;border-bottom:1px solid rgba(232,201,160,.1)}
+  .s2-label{font-size:7px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:rgba(240,235,227,.3);margin-bottom:6px}
+  .s2-sizes{display:flex;gap:5px;margin-bottom:10px}
+  .s2-size{width:26px;height:26px;border-radius:6px;border:1px solid rgba(232,201,160,.22);font-size:7px;color:rgba(240,235,227,.5);display:flex;align-items:center;justify-content:center}
+  .s2-size.sel{background:#E8C9A0;border-color:#E8C9A0;color:#2a1a05;font-weight:700}
+  .s2-cta{width:100%;padding:10px;border-radius:8px;background:#E8C9A0;color:#1e1005;font-size:7.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;text-align:center}
+  .s3-bg{background:#161410}
+  .s3-header{padding:14px;border-bottom:1px solid rgba(232,201,160,.1);display:flex;justify-content:space-between;align-items:center}
+  .s3-title{font-size:13px;font-style:italic;color:#f0ebe3;font-family:'Playfair Display',serif}
+  .s3-subtitle{font-size:6.5px;color:rgba(240,235,227,.35)}
+  .s3-close2{width:24px;height:24px;border-radius:50%;background:rgba(255,255,255,.04);border:1px solid rgba(232,201,160,.14);color:rgba(240,235,227,.6);font-size:12px;display:flex;align-items:center;justify-content:center}
+  .s3-items{padding:8px 12px}
+  .s3-item{display:flex;gap:8px;padding:8px 0;border-bottom:1px solid rgba(232,201,160,.06)}
+  .s3-img{width:40px;height:40px;border-radius:8px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:16px;border:1px solid rgba(232,201,160,.1)}
+  .s3-info{flex:1}
+  .s3-name{font-size:7.5px;font-weight:500;color:#f0ebe3;margin-bottom:2px}
+  .s3-meta2{font-size:6px;color:rgba(240,235,227,.35);margin-bottom:5px}
+  .s3-row{display:flex;justify-content:space-between;align-items:center}
+  .s3-qty{display:flex;align-items:center;border:1px solid rgba(232,201,160,.14);border-radius:6px;background:rgba(255,255,255,.03);overflow:hidden}
+  .s3-qb{width:16px;height:16px;font-size:10px;display:flex;align-items:center;justify-content:center;color:rgba(240,235,227,.6)}
+  .s3-qn{width:16px;text-align:center;font-size:7px;font-weight:600;border-left:1px solid rgba(232,201,160,.1);border-right:1px solid rgba(232,201,160,.1);display:flex;align-items:center;justify-content:center}
+  .s3-price{font-size:8px;font-weight:600;color:#E8C9A0}
+  .s3-footer{padding:8px 12px 14px;border-top:1px solid rgba(232,201,160,.1)}
+  .s3-trow{display:flex;justify-content:space-between;font-size:7px;color:rgba(240,235,227,.5);margin-bottom:3px}
+  .s3-trow.big{font-size:9.5px;font-weight:600;color:#f0ebe3;padding-top:5px;border-top:1px solid rgba(232,201,160,.1);margin-top:3px}
+  .s3-trow.big span:last-child{color:#E8C9A0}
+  .s3-save{color:#2ecc71 !important}
+  .s3-wa{width:100%;padding:9px;border-radius:8px;background:#25D366;color:#fff;font-size:7.5px;font-weight:700;text-align:center;margin-top:8px;display:flex;align-items:center;justify-content:center;gap:4px}
+
+  /* DIVIDER */
+  .divider{position:relative;z-index:1;display:flex;align-items:center;gap:1rem;padding:0 5%;margin-bottom:4rem}
+  .divider::before,.divider::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,transparent,rgba(0,212,255,.14),transparent)}
+  .divider-text{font-size:.6rem;letter-spacing:.2em;color:var(--text-faint);text-transform:uppercase;white-space:nowrap}
+  body.ar .divider-text{font-family:'Cairo',sans-serif;letter-spacing:0}
+
+  /* SECTIONS */
+  .section{position:relative;z-index:1;padding:0 5% 5rem}
+  .section-label{font-size:.65rem;letter-spacing:.2em;color:var(--accent);text-transform:uppercase;margin-bottom:2.5rem;display:flex;align-items:center;gap:1rem}
+  .section-label::after{content:'';flex:1;max-width:55px;height:1px;background:var(--accent);opacity:.3}
+  body.ar .section-label{font-family:'Cairo',sans-serif;letter-spacing:0;flex-direction:row-reverse}
+  body.ar .section-label::after{order:-1}
+
+  /* STATS */
+  .stats-row{display:flex;gap:0;border:1px solid var(--card-border);background:var(--card-border);flex-wrap:wrap}
+  .stat-box{flex:1;min-width:140px;background:var(--bg);padding:2rem 1.5rem;text-align:center}
+  .stat-number{font-family:'Syne',sans-serif;font-size:2.6rem;font-weight:800;color:var(--accent);line-height:1;letter-spacing:-.02em;margin-bottom:.5rem;text-shadow:0 0 25px rgba(0,212,255,.28)}
+  body.ar .stat-number{font-family:'Cairo',sans-serif}
+  .stat-label{font-size:.62rem;letter-spacing:.15em;color:var(--text-faint);text-transform:uppercase}
+  body.ar .stat-label{font-family:'Cairo',sans-serif;letter-spacing:0;font-size:.78rem}
+
+  /* DEMO LAUNCH */
+  .demo-launch{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1.8rem;padding:4.5rem 2rem;border:1px solid var(--card-border);border-top:2px solid var(--accent);background:var(--card-bg);text-align:center;position:relative;overflow:hidden}
+  .demo-launch::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(0,212,255,.015) 1px,transparent 1px),linear-gradient(90deg,rgba(0,212,255,.015) 1px,transparent 1px);background-size:30px 30px;pointer-events:none}
+  .demo-launch-icon{width:68px;height:68px;border:1px solid rgba(0,212,255,.25);background:rgba(0,212,255,.05);display:flex;align-items:center;justify-content:center;color:var(--accent);font-size:1.5rem;position:relative;z-index:1}
+  .demo-launch-label{font-size:.58rem;letter-spacing:.22em;color:var(--text-faint);text-transform:uppercase;margin-bottom:.3rem;position:relative;z-index:1}
+  body.ar .demo-launch-label{font-family:'Cairo',sans-serif;letter-spacing:0}
+  .demo-launch-text{font-size:.75rem;color:var(--text-muted);letter-spacing:.04em;line-height:1.85;max-width:360px;position:relative;z-index:1}
+  body.ar .demo-launch-text{font-family:'Cairo',sans-serif;font-size:.9rem;letter-spacing:0}
+  .demo-launch-btn{display:inline-flex;align-items:center;gap:.65rem;font-family:'Space Mono',monospace;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:#050508;background:var(--accent);text-decoration:none;padding:1rem 2.4rem;font-weight:700;transition:all .3s;position:relative;z-index:1}
+  .demo-launch-btn:hover{background:#fff;box-shadow:0 0 36px var(--accent-glow);transform:translateY(-1px)}
+  body.ar .demo-launch-btn{font-family:'Cairo',sans-serif;font-size:.9rem;letter-spacing:0}
+  .demo-launch-hint{font-size:.6rem;color:var(--text-faint);letter-spacing:.08em;position:relative;z-index:1}
+  body.ar .demo-launch-hint{font-family:'Cairo',sans-serif;letter-spacing:0;font-size:.72rem}
+
+  /* FEATURES */
+  .features-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:1px;border:1px solid var(--card-border);background:var(--card-border)}
+  .feature-item{background:var(--bg);padding:1.8rem 1.6rem;transition:background .3s}
+  .feature-item:hover{background:rgba(255,255,255,.025)}
+  .fi-icon{width:38px;height:38px;border:1px solid rgba(0,212,255,.2);background:rgba(0,212,255,.05);display:flex;align-items:center;justify-content:center;margin-bottom:1rem;color:var(--accent);font-size:.88rem}
+  .feature-name{font-family:'Syne',sans-serif;font-size:.9rem;font-weight:700;color:var(--text);margin-bottom:.45rem}
+  body.ar .feature-name{font-family:'Cairo',sans-serif}
+  .feature-desc{font-size:.72rem;color:var(--text-muted);line-height:1.75}
+  body.ar .feature-desc{font-family:'Cairo',sans-serif;font-size:.82rem}
+
+  /* TECH */
+  .tech-row{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:2rem}
+  .tech-pill{display:flex;align-items:center;gap:.55rem;background:var(--card-bg);border:1px solid var(--card-border);padding:.58rem 1.1rem;font-size:.7rem;letter-spacing:.06em;color:var(--text-muted);transition:border-color .2s,color .2s}
+  .tech-pill:hover{border-color:rgba(0,212,255,.28);color:var(--text)}
+  .tech-pill i{color:var(--accent);font-size:.82rem}
+  body.ar .tech-pill{font-family:'Cairo',sans-serif;letter-spacing:0}
+
+  /* FOOTER */
+  .project-footer{position:relative;z-index:1;border-top:1px solid rgba(255,255,255,.05);padding:2rem 5%;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+  .footer-logo{font-size:.8rem;color:var(--text-muted)}
+  .footer-logo span{color:var(--accent)}
+  .btn-back{display:inline-flex;align-items:center;gap:.5rem;font-family:'Space Mono',monospace;font-size:.64rem;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;padding:.7rem 1.4rem;background:transparent;color:var(--text-muted);border:1px solid rgba(255,255,255,.1);transition:all .3s}
+  body.ar .btn-back{font-family:'Cairo',sans-serif;letter-spacing:0}
+  .btn-back:hover{border-color:var(--accent);color:var(--accent)}
+
+  /* ANIMATIONS */
+  @keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+  @keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
+  .fade-in{opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s ease}
+  .fade-in.visible{opacity:1;transform:translateY(0)}
+  .fd1{transition-delay:.1s}.fd2{transition-delay:.2s}.fd3{transition-delay:.3s}
+  .fd4{transition-delay:.4s}.fd5{transition-delay:.5s}.fd6{transition-delay:.6s}
+
+  @media(max-width:900px){.project-hero{grid-template-columns:1fr;gap:3rem;padding-top:calc(var(--nav-h) + 3rem)}.hero-right{height:400px}.phone-frame{width:185px}}
+  @media(max-width:600px){.hero-right{height:320px}.phone-frame{width:148px}.stats-row{flex-direction:column}.hero-ctas{flex-direction:column}}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="../index.html"><span>Nuvarix</span><span>.agency</span></a>
+  <div class="nav-right">
+    <button class="lang-btn" onclick="toggleLang()">
+      <i class="fa-solid fa-globe"></i>
+      <span id="lang-label">العربية</span>
+    </button>
+    <a class="nav-back" href="../index.html#projects">
+      <i class="fa-solid fa-arrow-left" id="back-icon"></i>
+      <span data-en="Projects" data-ar="المشاريع">Projects</span>
+    </a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="project-hero">
+  <div class="hero-left">
+    <p class="breadcrumb"><span data-en="Projects" data-ar="المشاريع">Projects</span> / <span style="color:var(--accent)">Noor Store</span></p>
+    <div class="project-type-tag" data-en="Clothing Store App" data-ar="تطبيق متجر ملابس">Clothing Store App</div>
+    <h1 class="project-title">Noor<br>Store</h1>
+    <p class="project-title-ar">نور ستور</p>
+    <p class="project-desc-hero" data-en="A premium mobile-first clothing store built for the Algerian market. Elegant browsing with smart category filtering, a full cart system, and direct WhatsApp ordering — no account needed, zero friction." data-ar="متجر ملابس متميز مصمم للهاتف المحمول أولاً، موجّه للسوق الجزائرية. تجربة تصفح أنيقة مع فلترة ذكية حسب الفئات، سلة تسوق متكاملة، وطلب مباشر عبر واتساب — بدون حساب ولا تعقيدات.">A premium mobile-first clothing store built for the Algerian market. Elegant browsing with smart category filtering, a full cart system, and direct WhatsApp ordering — no account needed, zero friction.</p>
+    <div class="hero-meta">
+      <div><div class="meta-label" data-en="Client" data-ar="العميل">Client</div><div class="meta-value">Noor Store DZ</div></div>
+      <div><div class="meta-label" data-en="Type" data-ar="النوع">Type</div><div class="meta-value" data-en="Web App" data-ar="تطبيق ويب">Web App</div></div>
+      <div><div class="meta-label" data-en="Year" data-ar="السنة">Year</div><div class="meta-value">2026</div></div>
+    </div>
+    <div class="hero-ctas">
+      <a href="#live-demo" class="btn btn-primary"><i class="fa-solid fa-play"></i><span data-en="Live Demo" data-ar="تجربة مباشرة">Live Demo</span></a>
+      <a href="../index.html#projects" class="btn btn-outline"><i class="fa-solid fa-arrow-left" id="cta-back-icon"></i><span data-en="All Projects" data-ar="كل المشاريع">All Projects</span></a>
+    </div>
+    <div class="hero-tags">
+      <span class="tag">React</span><span class="tag">Mobile-First</span>
+      <span class="tag">WhatsApp</span><span class="tag">E-commerce</span><span class="tag">Bilingual</span>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="phone-glow"></div>
+    <!-- Cart -->
+    <div class="phone-wrap left">
+      <div class="phone-frame">
+        <div class="screen s3-bg">
+          <div class="s3-header">
+            <div><div class="s3-title">Your Cart</div><div class="s3-subtitle">2 items</div></div>
+            <div class="s3-close2">×</div>
+          </div>
+          <div class="s3-items">
+            <div class="s3-item">
+              <div class="s3-img" style="background:linear-gradient(135deg,#4a3728,#6b4e35)">👗</div>
+              <div class="s3-info"><div class="s3-name">Jowhara Abaya</div><div class="s3-meta2">Size: M</div><div class="s3-row"><div class="s3-qty"><div class="s3-qb">−</div><div class="s3-qn">1</div><div class="s3-qb">+</div></div><div class="s3-price">8 500 DZD</div></div></div>
+            </div>
+            <div class="s3-item">
+              <div class="s3-img" style="background:linear-gradient(135deg,#2d4a3e,#3d6654)">👗</div>
+              <div class="s3-info"><div class="s3-name">Yasmine Dress</div><div class="s3-meta2">Size: M</div><div class="s3-row"><div class="s3-qty"><div class="s3-qb">−</div><div class="s3-qn">1</div><div class="s3-qb">+</div></div><div class="s3-price" style="color:#e05555">4 900 DZD</div></div></div>
+            </div>
+          </div>
+          <div class="s3-footer">
+            <div class="s3-trow"><span>Subtotal</span><span>13 400 DZD</span></div>
+            <div class="s3-trow s3-save"><span>🎉 You save</span><span>1 300 DZD</span></div>
+            <div class="s3-trow big"><span>Total</span><span>13 400 DZD</span></div>
+            <div class="s3-wa">⊕ Order via WhatsApp</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Grid -->
+    <div class="phone-wrap main">
+      <div class="phone-frame">
+        <div class="screen">
+          <div class="s1-header">
+            <div class="s1-logo-row"><div><div class="s1-logo">Noor<span class="s1-logo-dot"></span>Store</div><span class="s1-logo-sub">نور ستور</span></div><div class="s1-cart-btn">🛍</div></div>
+            <div class="s1-search"><span style="font-size:9px;opacity:.5">⌕</span><span>Search products…</span></div>
+          </div>
+          <div class="s1-cats"><div class="s1-cat active">All</div><div class="s1-cat">Women</div><div class="s1-cat">Men</div><div class="s1-cat">Kids</div><div class="s1-cat">🔥</div></div>
+          <div class="s1-body">
+            <div class="s1-meta">12 pieces</div>
+            <div class="s1-grid">
+              <div class="s1-card"><div class="s1-card-img" style="background:linear-gradient(135deg,#4a3728,#6b4e35)">👗</div><div class="s1-card-body"><div class="s1-name-ar">عباءة الجوهرة</div><div class="s1-name-en">Jowhara Abaya</div><div class="s1-footer"><div class="s1-price">8 500 DZD</div><div class="s1-add">+</div></div></div></div>
+              <div class="s1-card"><div class="s1-card-img" style="background:linear-gradient(135deg,#2d4a3e,#3d6654)">👗<span class="s1-sale-badge">Sale</span></div><div class="s1-card-body"><div class="s1-name-ar">فستان الياسمين</div><div class="s1-name-en">Yasmine Dress</div><div class="s1-footer"><div><div class="s1-price-sale">4 900</div><div class="s1-price-old">6 200</div></div><div class="s1-add">+</div></div></div></div>
+              <div class="s1-card"><div class="s1-card-img" style="background:linear-gradient(135deg,#4a3535,#6b4040)">👘</div><div class="s1-card-body"><div class="s1-name-ar">بلوزة النسيم</div><div class="s1-name-en">Nassim Blouse</div><div class="s1-footer"><div class="s1-price">3 800 DZD</div><div class="s1-add">+</div></div></div></div>
+              <div class="s1-card"><div class="s1-card-img" style="background:linear-gradient(135deg,#2a3a4a,#364d63)">👔<span class="s1-sale-badge">Sale</span></div><div class="s1-card-body"><div class="s1-name-ar">قميص الأطلس</div><div class="s1-name-en">Atlas Shirt</div><div class="s1-footer"><div><div class="s1-price-sale">3 200</div><div class="s1-price-old">4 500</div></div><div class="s1-add">+</div></div></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Modal -->
+    <div class="phone-wrap right">
+      <div class="phone-frame">
+        <div class="screen s2-bg">
+          <div class="s2-img" style="background:linear-gradient(135deg,#4a3728,#6b4e35)"><span style="z-index:1">👗</span><div class="s2-close">×</div></div>
+          <div class="s2-body">
+            <div class="s2-ar">عباءة الجوهرة</div><div class="s2-en">Jowhara Abaya</div>
+            <div class="s2-price">8 500 DZD</div>
+            <div class="s2-desc">An elegant flowing abaya crafted from premium crepe fabric, featuring delicate gold embroidery.</div>
+            <div class="s2-label">Choose Size</div>
+            <div class="s2-sizes"><div class="s2-size">S</div><div class="s2-size sel">M</div><div class="s2-size">L</div><div class="s2-size">XL</div></div>
+            <div class="s2-cta">Add to Cart — 8 500 DZD</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"><span class="divider-text" data-en="Project Details" data-ar="تفاصيل المشروع">Project Details</span></div>
+
+<!-- STATS -->
+<div class="section" style="margin-bottom:1rem">
+  <div class="stats-row fade-in">
+    <div class="stat-box"><div class="stat-number">12</div><div class="stat-label" data-en="Products" data-ar="منتج">Products</div></div>
+    <div class="stat-box"><div class="stat-number">4</div><div class="stat-label" data-en="Categories" data-ar="فئة">Categories</div></div>
+    <div class="stat-box"><div class="stat-number">100%</div><div class="stat-label" data-en="Mobile First" data-ar="الهاتف أولاً">Mobile First</div></div>
+    <div class="stat-box"><div class="stat-number">2</div><div class="stat-label" data-en="Languages" data-ar="لغتان">Languages</div></div>
+  </div>
+</div>
+
+<!-- LIVE DEMO -->
+<div class="section fade-in" id="live-demo">
+  <p class="section-label">
+    <i class="fa-solid fa-circle" style="font-size:.45rem;animation:blink 1.2s ease-in-out infinite"></i>
+    <span data-en="Live Demo" data-ar="تجربة مباشرة">Live Demo</span>
+  </p>
+  <div class="demo-launch">
+    <div class="demo-launch-icon"><i class="fa-solid fa-mobile-screen-button"></i></div>
+    <div>
+      <p class="demo-launch-label" data-en="Interactive Preview" data-ar="معاينة تفاعلية">Interactive Preview</p>
+    </div>
+    <p class="demo-launch-text" data-en="Experience the full Noor Store app — add to cart, filter by category, choose sizes, and try WhatsApp ordering." data-ar="جرّب تطبيق نور ستور كاملاً — أضف للسلة، فلتر حسب الفئة، اختر المقاس، وجرّب الطلب عبر واتساب.">Experience the full Noor Store app — add to cart, filter by category, choose sizes, and try WhatsApp ordering.</p>
+    <a href="https://noorstore6.netlify.app/" target="_blank" class="demo-launch-btn">
+      <i class="fa-solid fa-arrow-up-right-from-square"></i>
+      <span data-en="Open Live Demo" data-ar="فتح العرض المباشر">Open Live Demo</span>
+    </a>
+    <p class="demo-launch-hint" data-en="Opens in a new tab" data-ar="يفتح في تاب جديد">Opens in a new tab</p>
+  </div>
+</div>
+
+<!-- FEATURES -->
+<div class="section">
+  <p class="section-label"><span data-en="Key Features" data-ar="الميزات الرئيسية">Key Features</span></p>
+  <div class="features-grid">
+    <div class="feature-item fade-in fd1"><div class="fi-icon"><i class="fa-solid fa-magnifying-glass"></i></div><div class="feature-name" data-en="Smart Search" data-ar="بحث ذكي">Smart Search</div><div class="feature-desc" data-en="Real-time search in English and Arabic with instant results as you type." data-ar="بحث فوري باللغتين العربية والإنجليزية مع نتائج آنية.">Real-time search in English and Arabic with instant results as you type.</div></div>
+    <div class="feature-item fade-in fd2"><div class="fi-icon"><i class="fa-solid fa-layer-group"></i></div><div class="feature-name" data-en="Category Filter" data-ar="فلترة بالفئات">Category Filter</div><div class="feature-desc" data-en="Women, Men, Kids, Sale tabs with smooth animations and live product count." data-ar="تبويبات النساء، الرجال، الأطفال، والتخفيضات مع عداد آني للمنتجات.">Women, Men, Kids, Sale tabs with smooth animations and live product count.</div></div>
+    <div class="feature-item fade-in fd3"><div class="fi-icon"><i class="fa-solid fa-cart-shopping"></i></div><div class="feature-name" data-en="Cart System" data-ar="سلة التسوق">Cart System</div><div class="feature-desc" data-en="Add, remove, adjust qty, auto-calculates savings. Choose sizes per product." data-ar="إضافة، حذف، تعديل الكمية، اختيار المقاس، وحساب تلقائي للتوفير.">Add, remove, adjust qty, auto-calculates savings. Choose sizes per product.</div></div>
+    <div class="feature-item fade-in fd4"><div class="fi-icon"><i class="fa-brands fa-whatsapp"></i></div><div class="feature-name" data-en="WhatsApp Order" data-ar="طلب واتساب">WhatsApp Order</div><div class="feature-desc" data-en="One tap sends the complete order with product names, sizes, quantities and total directly to WhatsApp." data-ar="ضغطة واحدة ترسل الطلب كاملاً بأسماء المنتجات والمقاسات والإجمالي عبر واتساب.">One tap sends the complete order with product names, sizes, quantities and total directly to WhatsApp.</div></div>
+    <div class="feature-item fade-in fd5"><div class="fi-icon"><i class="fa-solid fa-language"></i></div><div class="feature-name" data-en="Bilingual UI" data-ar="واجهة ثنائية اللغة">Bilingual UI</div><div class="feature-desc" data-en="Every product shown in both Arabic and English — adapted for the Algerian market." data-ar="كل منتج يظهر بالعربية والإنجليزية معاً — مصمم للسوق الجزائرية.">Every product shown in both Arabic and English — adapted for the Algerian market.</div></div>
+    <div class="feature-item fade-in fd6"><div class="fi-icon"><i class="fa-solid fa-wand-magic-sparkles"></i></div><div class="feature-name" data-en="Luxury Design" data-ar="تصميم فاخر">Luxury Design</div><div class="feature-desc" data-en="Warm gold palette, grain texture, Playfair Display serif — feels like a premium brand." data-ar="لوحة ذهبية دافئة، خامة ناعمة، خط Playfair — يشعر كعلامة تجارية فاخرة.">Warm gold palette, grain texture, Playfair Display serif — feels like a premium brand.</div></div>
+  </div>
+</div>
+
+<!-- TECH -->
+<div class="section" style="padding-top:0">
+  <p class="section-label"><span data-en="Tech Stack" data-ar="التقنيات المستخدمة">Tech Stack</span></p>
+  <div class="tech-row fade-in">
+    <div class="tech-pill"><i class="fa-brands fa-react"></i> React</div>
+    <div class="tech-pill"><i class="fa-brands fa-css3-alt"></i> Vanilla CSS</div>
+    <div class="tech-pill"><i class="fa-brands fa-google"></i> Google Fonts</div>
+    <div class="tech-pill"><i class="fa-brands fa-whatsapp"></i> WhatsApp API</div>
+    <div class="tech-pill"><i class="fa-solid fa-mobile-screen-button"></i> <span data-en="Mobile-First" data-ar="أولوية الهاتف">Mobile-First</span></div>
+    <div class="tech-pill"><i class="fa-solid fa-language"></i> <span data-en="Bilingual" data-ar="ثنائي اللغة">Bilingual</span></div>
+  </div>
+</div>
+
+<footer class="project-footer">
+  <div class="footer-logo"><span>Nuvarix</span>.agency</div>
+  <a href="../index.html#projects" class="btn-back">
+    <i class="fa-solid fa-arrow-left" id="footer-icon"></i>
+    <span data-en="Back to Projects" data-ar="العودة للمشاريع">Back to Projects</span>
+  </a>
+</footer>
+
+<script>
+  let lang = 'en';
+
+  function toggleLang() {
+    lang = lang === 'en' ? 'ar' : 'en';
+    const isAr = lang === 'ar';
+    document.body.classList.toggle('ar', isAr);
+    document.documentElement.lang = lang;
+    document.documentElement.dir = isAr ? 'rtl' : 'ltr';
+    document.getElementById('lang-label').textContent = isAr ? 'English' : 'العربية';
+    const arrowCls = isAr ? 'fa-arrow-right' : 'fa-arrow-left';
+    ['back-icon','cta-back-icon','footer-icon'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.className = 'fa-solid ' + arrowCls;
+    });
+    document.querySelectorAll('[data-en]').forEach(el => {
+      const v = isAr ? el.getAttribute('data-ar') : el.getAttribute('data-en');
+      if (v) el.textContent = v;
+    });
+  }
+
+  // Scroll observer
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
