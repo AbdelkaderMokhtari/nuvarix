@@ -3,12 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Nuvarix — وكالة تطوير الويب والموبايل والذكاء الاصطناعي في الجزائر">
+<meta name="theme-color" content="#050508">
 <title>Nuvarix — وكالة تطوير الويب والموبايل</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;700;800&family=Cairo:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;700;800&family=Cairo:wght@300;400;500;600;700;900&display=swap&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <style>
+/* ═══════════════════════════════════════════
+   TOKENS — DARK
+═══════════════════════════════════════════ */
 :root,
 [data-theme="dark"] {
   --bg: #050508;
@@ -19,21 +24,32 @@
   --accent: #00D4FF;
   --accent-dim: rgba(0,212,255,0.12);
   --accent-glow: rgba(0,212,255,0.4);
+  /* AI section accent — violet to differentiate */
+  --accent-ai: #A78BFA;
+  --accent-ai-dim: rgba(167,139,250,0.12);
+  --accent-ai-glow: rgba(167,139,250,0.35);
+  --accent-ai-border: rgba(167,139,250,0.25);
   --text: #F0F4FF;
-  --text-muted: rgba(240,244,255,0.55);
-  --text-faint: rgba(240,244,255,0.28);
-  --nav-bg: rgba(5,5,8,0.85);
+  --text-muted: rgba(240,244,255,0.58);
+  --text-faint: rgba(240,244,255,0.35);
+  --nav-bg: rgba(5,5,8,0.88);
   --nav-border: rgba(0,212,255,0.1);
   --footer-border: rgba(255,255,255,0.05);
   --grid-line: rgba(0,212,255,0.025);
   --scanline: rgba(0,0,0,0.04);
   --tag-bg: rgba(0,212,255,0.05);
+  --tag-ai-bg: rgba(167,139,250,0.07);
   --btn-outline-border: rgba(240,244,255,0.2);
   --shadow-card: 0 20px 40px rgba(0,0,0,0.4);
   --logo-faint: rgba(240,244,255,0.3);
   --nav-h: 70px;
   --transition: 0.35s cubic-bezier(0.4,0,0.2,1);
+  --focus-ring: 0 0 0 2px var(--bg), 0 0 0 4px var(--accent);
 }
+
+/* ═══════════════════════════════════════════
+   TOKENS — LIGHT
+═══════════════════════════════════════════ */
 [data-theme="light"] {
   --bg: #F5F7FF;
   --bg2: #ECEEF8;
@@ -43,21 +59,32 @@
   --accent: #0070E0;
   --accent-dim: rgba(0,112,224,0.1);
   --accent-glow: rgba(0,112,224,0.3);
+  --accent-ai: #7C3AED;
+  --accent-ai-dim: rgba(124,58,237,0.1);
+  --accent-ai-glow: rgba(124,58,237,0.25);
+  --accent-ai-border: rgba(124,58,237,0.2);
   --text: #0D0F1C;
-  --text-muted: rgba(13,15,28,0.6);
-  --text-faint: rgba(13,15,28,0.35);
-  --nav-bg: rgba(245,247,255,0.9);
+  --text-muted: rgba(13,15,28,0.62);
+  --text-faint: rgba(13,15,28,0.42);
+  --nav-bg: rgba(245,247,255,0.92);
   --nav-border: rgba(0,112,224,0.15);
   --footer-border: rgba(0,0,0,0.07);
   --grid-line: rgba(0,112,224,0.04);
   --scanline: transparent;
   --tag-bg: rgba(0,112,224,0.07);
+  --tag-ai-bg: rgba(124,58,237,0.07);
   --btn-outline-border: rgba(13,15,28,0.2);
   --shadow-card: 0 8px 32px rgba(0,0,0,0.08);
   --logo-faint: rgba(13,15,28,0.3);
+  --focus-ring: 0 0 0 2px var(--bg), 0 0 0 4px var(--accent);
 }
+
+/* ═══════════════════════════════════════════
+   BASE
+═══════════════════════════════════════════ */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
+
 body {
   background: var(--bg);
   color: var(--text);
@@ -65,50 +92,79 @@ body {
   line-height: 1.6;
   transition: background var(--transition), color var(--transition);
 }
+
+/* font-display via JS-free approach — added to @font-face override */
+@font-face { font-family: 'Cairo'; font-display: swap; }
+@font-face { font-family: 'Space Mono'; font-display: swap; }
+@font-face { font-family: 'Syne'; font-display: swap; }
+
 [data-lang="ar"] body,
 [data-lang="ar"] .service-name,
 [data-lang="ar"] .project-name,
 [data-lang="ar"] .contact-title,
 [data-lang="ar"] h1,
 [data-lang="ar"] h2,
-[data-lang="ar"] h3 {
-  font-family: 'Cairo', sans-serif;
-}
+[data-lang="ar"] h3 { font-family: 'Cairo', sans-serif; }
+
 [data-lang="en"] body,
 [data-lang="en"] .service-name,
 [data-lang="en"] .project-name,
 [data-lang="en"] .contact-title,
 [data-lang="en"] h1.hero-title,
 [data-lang="en"] h2,
-[data-lang="en"] h3 {
-  font-family: 'Space Mono', monospace;
-}
+[data-lang="en"] h3 { font-family: 'Space Mono', monospace; }
+
 [data-lang="en"] h1.hero-title,
 [data-lang="en"] .service-name,
 [data-lang="en"] .project-name,
-[data-lang="en"] .contact-title {
-  font-family: 'Syne', sans-serif;
-}
+[data-lang="en"] .contact-title { font-family: 'Syne', sans-serif; }
+
+/* Grid background */
 body::before {
   content: '';
-  position: fixed;
-  inset: 0;
+  position: fixed; inset: 0;
   background-image:
     linear-gradient(var(--grid-line) 1px, transparent 1px),
     linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
   background-size: 60px 60px;
-  pointer-events: none;
-  z-index: 0;
+  pointer-events: none; z-index: 0;
   transition: background-image var(--transition);
 }
+
+/* Scanlines */
 body::after {
   content: '';
-  position: fixed;
-  inset: 0;
+  position: fixed; inset: 0;
   background: repeating-linear-gradient(0deg,transparent,transparent 2px,var(--scanline) 2px,var(--scanline) 4px);
-  pointer-events: none;
-  z-index: 0;
+  pointer-events: none; z-index: 0;
 }
+
+/* ─── FOCUS STYLES (accessibility) ─── */
+:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+  border-radius: 2px;
+}
+
+/* ─── SKIP LINK ─── */
+.skip-link {
+  position: fixed;
+  top: -100%;
+  left: 1rem;
+  z-index: 9999;
+  background: var(--accent);
+  color: #050508;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.5rem 1rem;
+  text-decoration: none;
+  border-radius: 0 0 4px 4px;
+  transition: top 0.2s;
+}
+.skip-link:focus { top: 0; }
+
+/* ─── TOP BAR ─── */
 .top-bar {
   position: fixed;
   top: 0; left: 0; right: 0;
@@ -123,6 +179,7 @@ body::after {
   background: var(--bg);
   transition: background var(--transition);
 }
+
 .top-btn {
   display: inline-flex;
   align-items: center;
@@ -142,6 +199,8 @@ body::after {
 .top-btn:hover { border-color: var(--accent); color: var(--accent); }
 .top-btn.active { background: var(--accent-dim); border-color: var(--accent); color: var(--accent); }
 .top-divider { width: 1px; height: 14px; background: var(--card-border); }
+
+/* ─── NAVBAR ─── */
 nav {
   position: fixed;
   top: 36px; left: 0; right: 0;
@@ -159,6 +218,7 @@ nav.scrolled {
   -webkit-backdrop-filter: blur(16px);
   border-bottom: 1px solid var(--nav-border);
 }
+
 .nav-logo {
   font-family: 'Space Mono', monospace;
   font-size: 1.05rem;
@@ -168,11 +228,8 @@ nav.scrolled {
 }
 .nav-logo span:first-child { color: var(--accent); }
 .nav-logo span:last-child { color: var(--logo-faint); }
-.nav-links {
-  display: flex;
-  gap: 2.5rem;
-  list-style: none;
-}
+
+.nav-links { display: flex; gap: 2.5rem; list-style: none; }
 .nav-links a {
   color: var(--text-muted);
   text-decoration: none;
@@ -182,6 +239,7 @@ nav.scrolled {
   font-family: 'Space Mono', monospace;
   transition: color 0.2s;
   position: relative;
+  padding-bottom: 2px;
 }
 .nav-links a::after {
   content: '';
@@ -190,12 +248,20 @@ nav.scrolled {
   height: 1px;
   background: var(--accent);
   transform: scaleX(0);
-  transition: transform 0.2s;
+  transition: transform 0.25s ease;
   transform-origin: right;
 }
 [dir="rtl"] .nav-links a::after { transform-origin: left; }
-.nav-links a:hover { color: var(--accent); }
-.nav-links a:hover::after { transform: scaleX(1); }
+.nav-links a:hover,
+.nav-links a[aria-current="page"] { color: var(--accent); }
+.nav-links a:hover::after,
+.nav-links a[aria-current="page"]::after { transform: scaleX(1); }
+
+/* AI nav link gets violet underline */
+.nav-links .nav-ai a { color: var(--text-muted); }
+.nav-links .nav-ai a::after { background: var(--accent-ai); }
+.nav-links .nav-ai a:hover { color: var(--accent-ai); }
+
 .hamburger {
   display: none;
   flex-direction: column;
@@ -206,45 +272,63 @@ nav.scrolled {
   border: none;
 }
 .hamburger span {
-  display: block;
-  width: 22px;
-  height: 2px;
+  display: block; width: 22px; height: 2px;
   background: var(--text);
   transition: transform 0.3s, opacity 0.3s;
 }
 .hamburger.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
 .hamburger.active span:nth-child(2) { opacity: 0; }
 .hamburger.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* Mobile menu with backdrop overlay */
+.mobile-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(5,5,8,0.6);
+  backdrop-filter: blur(4px);
+  z-index: 98;
+}
+.mobile-overlay.open { display: block; }
+
 .mobile-menu {
   display: none;
   position: fixed;
   top: calc(36px + var(--nav-h));
   left: 0; right: 0;
-  background: var(--bg);
-  backdrop-filter: blur(20px);
-  padding: 2rem 5%;
+  background: var(--bg2);
   border-bottom: 1px solid var(--nav-border);
   z-index: 99;
+  transform: translateY(-8px);
+  opacity: 0;
+  transition: transform 0.25s ease, opacity 0.25s ease;
 }
-.mobile-menu.open { display: block; }
-.mobile-menu a {
+.mobile-menu.open {
   display: block;
+  transform: translateY(0);
+  opacity: 1;
+}
+.mobile-menu a {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
   color: var(--text-muted);
   text-decoration: none;
   font-size: 0.85rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   font-family: 'Space Mono', monospace;
-  padding: 1rem 0;
+  padding: 1rem 5%;
   border-bottom: 1px solid var(--card-border);
-  transition: color 0.2s;
+  transition: color 0.2s, background 0.2s;
 }
-.mobile-menu a:hover { color: var(--accent); }
-section {
-  position: relative;
-  z-index: 1;
-  padding: 7rem 5%;
-}
+.mobile-menu a:hover { color: var(--accent); background: var(--accent-dim); }
+.mobile-menu a.nav-ai-mobile:hover { color: var(--accent-ai); background: var(--accent-ai-dim); }
+.mobile-menu a i { font-size: 0.8rem; width: 16px; text-align: center; }
+
+/* ─── SECTION BASE ─── */
+section { position: relative; z-index: 1; padding: 7rem 5%; }
+
 .section-label {
   font-family: 'Space Mono', monospace;
   font-size: 0.68rem;
@@ -257,20 +341,23 @@ section {
   gap: 1rem;
 }
 .section-label::after {
-  content: '';
-  flex: 1;
-  max-width: 80px;
-  height: 1px;
-  background: var(--accent);
-  opacity: 0.4;
+  content: ''; flex: 1; max-width: 80px;
+  height: 1px; background: var(--accent); opacity: 0.4;
 }
+
+/* AI section label uses violet */
+#ai-projects .section-label { color: var(--accent-ai); }
+#ai-projects .section-label::after { background: var(--accent-ai); }
+
 .corner-tl,.corner-tr,.corner-bl,.corner-br {
   position: absolute; width: 20px; height: 20px; pointer-events: none;
 }
-.corner-tl { top: 16px; left: 16px; border-top: 1px solid var(--accent); border-left: 1px solid var(--accent); opacity: 0.4; }
-.corner-tr { top: 16px; right: 16px; border-top: 1px solid var(--accent); border-right: 1px solid var(--accent); opacity: 0.4; }
-.corner-bl { bottom: 16px; left: 16px; border-bottom: 1px solid var(--accent); border-left: 1px solid var(--accent); opacity: 0.4; }
-.corner-br { bottom: 16px; right: 16px; border-bottom: 1px solid var(--accent); border-right: 1px solid var(--accent); opacity: 0.4; }
+.corner-tl { top:16px;left:16px;border-top:1px solid var(--accent);border-left:1px solid var(--accent);opacity:0.4; }
+.corner-tr { top:16px;right:16px;border-top:1px solid var(--accent);border-right:1px solid var(--accent);opacity:0.4; }
+.corner-bl { bottom:16px;left:16px;border-bottom:1px solid var(--accent);border-left:1px solid var(--accent);opacity:0.4; }
+.corner-br { bottom:16px;right:16px;border-bottom:1px solid var(--accent);border-right:1px solid var(--accent);opacity:0.4; }
+
+/* ─── HERO ─── */
 #hero {
   min-height: 100vh;
   display: flex;
@@ -281,6 +368,7 @@ section {
   overflow: hidden;
 }
 .hero-inner { max-width: 820px; }
+
 .hero-eyebrow {
   font-family: 'Space Mono', monospace;
   font-size: 0.68rem;
@@ -291,6 +379,7 @@ section {
   opacity: 0;
   animation: fadeUp 0.8s 0.2s forwards;
 }
+
 h1.hero-title {
   font-size: clamp(2.8rem, 7.5vw, 6.5rem);
   font-weight: 800;
@@ -300,14 +389,10 @@ h1.hero-title {
   opacity: 0;
   animation: fadeUp 0.8s 0.4s forwards;
 }
-[data-lang="ar"] h1.hero-title {
-  font-family: 'Cairo', sans-serif;
-  font-weight: 900;
-  line-height: 1.15;
-  letter-spacing: -0.01em;
-}
+[data-lang="ar"] h1.hero-title { font-family:'Cairo',sans-serif;font-weight:900;line-height:1.15;letter-spacing:-0.01em; }
 h1.hero-title .white { color: var(--text); }
 h1.hero-title .neon { color: var(--accent); text-shadow: 0 0 40px var(--accent-glow); }
+
 .hero-sub {
   font-size: 0.85rem;
   color: var(--text-muted);
@@ -317,56 +402,58 @@ h1.hero-title .neon { color: var(--accent); text-shadow: 0 0 40px var(--accent-g
   animation: fadeUp 0.8s 0.6s forwards;
   font-family: 'Space Mono', monospace;
 }
-[data-lang="ar"] .hero-sub { font-family: 'Cairo', sans-serif; font-size: 1rem; letter-spacing: 0; }
+[data-lang="ar"] .hero-sub { font-family:'Cairo',sans-serif;font-size:1rem;letter-spacing:0; }
+
 .hero-ctas {
-  display: flex;
-  gap: 1rem;
-  flex-wrap: wrap;
-  opacity: 0;
-  animation: fadeUp 0.8s 0.8s forwards;
+  display: flex; gap: 1rem; flex-wrap: wrap;
+  opacity: 0; animation: fadeUp 0.8s 0.8s forwards;
 }
+
+/* ─── SCROLL PROGRESS BAR ─── */
+#scroll-progress {
+  position: fixed;
+  top: 36px;
+  left: 0;
+  height: 2px;
+  width: 0%;
+  background: linear-gradient(90deg, var(--accent), var(--accent-ai));
+  z-index: 101;
+  transition: width 0.1s linear;
+  pointer-events: none;
+}
+
+/* ─── BUTTONS ─── */
 .btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
+  display: inline-flex; align-items: center; gap: 0.5rem;
   font-family: 'Space Mono', monospace;
-  font-size: 0.72rem;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  text-decoration: none;
+  font-size: 0.72rem; letter-spacing: 0.15em;
+  text-transform: uppercase; text-decoration: none;
   padding: 0.85rem 2rem;
-  transition: all 0.3s;
-  cursor: pointer;
-  border: none;
-  position: relative;
+  transition: all 0.3s; cursor: pointer; border: none; position: relative;
 }
-[data-lang="ar"] .btn { font-family: 'Cairo', sans-serif; letter-spacing: 0.05em; font-size: 0.85rem; font-weight: 600; }
+[data-lang="ar"] .btn { font-family:'Cairo',sans-serif;letter-spacing:0.05em;font-size:0.85rem;font-weight:600; }
 .btn-primary { background: var(--accent); color: #050508; font-weight: 700; }
 .btn-primary:hover { filter: brightness(1.15); box-shadow: 0 0 30px var(--accent-glow); transform: translateY(-2px); }
 .btn-outline { background: transparent; color: var(--text); border: 1px solid var(--btn-outline-border); }
 .btn-outline:hover { border-color: var(--accent); color: var(--accent); box-shadow: 0 0 20px var(--accent-dim); transform: translateY(-2px); }
+
+/* ─── HERO SVG ─── */
 .hero-line {
-  position: absolute;
-  right: 0;
-  top: 50%;
+  position: absolute; right: 0; top: 50%;
   transform: translateY(-50%);
-  width: 45%;
-  height: 400px;
-  overflow: hidden;
-  pointer-events: none;
-  opacity: 0.4;
+  width: 45%; height: 400px;
+  overflow: hidden; pointer-events: none; opacity: 0.4;
 }
 [data-theme="light"] .hero-line { opacity: 0.25; }
 .hero-line svg { width: 100%; height: 100%; }
+
+/* ─── PARTICLES ─── */
 #particles { position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: 0; }
 .hero-inner { position: relative; z-index: 1; }
 .particle {
-  position: absolute;
-  width: 2px; height: 2px;
-  background: var(--accent);
-  border-radius: 50%;
-  animation: float linear infinite;
-  opacity: 0;
+  position: absolute; width: 2px; height: 2px;
+  background: var(--accent); border-radius: 50%;
+  animation: float linear infinite; opacity: 0;
 }
 @keyframes float {
   0%   { transform: translateY(0) translateX(0); opacity: 0; }
@@ -374,18 +461,20 @@ h1.hero-title .neon { color: var(--accent); text-shadow: 0 0 40px var(--accent-g
   90%  { opacity: 0.3; }
   100% { transform: translateY(-100vh) translateX(var(--dx)); opacity: 0; }
 }
+
+/* ─── STATS BAR ─── */
 .stats-bar {
-  display: flex;
-  gap: 3rem;
+  display: flex; gap: 3rem;
   padding: 2.5rem 0;
   border-top: 1px solid var(--card-border);
   border-bottom: 1px solid var(--card-border);
-  margin-bottom: 5rem;
-  flex-wrap: wrap;
+  margin-bottom: 5rem; flex-wrap: wrap;
 }
-.stat-number { font-family: 'Space Mono', monospace; font-size: 2rem; font-weight: 700; color: var(--accent); line-height: 1; }
-.stat-label { font-size: 0.7rem; color: var(--text-muted); letter-spacing: 0.1em; text-transform: uppercase; margin-top: 4px; }
-[data-lang="ar"] .stat-label { font-family: 'Cairo', sans-serif; letter-spacing: 0; }
+.stat-number { font-family:'Space Mono',monospace;font-size:2rem;font-weight:700;color:var(--accent);line-height:1; }
+.stat-label { font-size:0.7rem;color:var(--text-muted);letter-spacing:0.1em;text-transform:uppercase;margin-top:4px; }
+[data-lang="ar"] .stat-label { font-family:'Cairo',sans-serif;letter-spacing:0; }
+
+/* ─── SERVICES ─── */
 .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 1.5rem; }
 .service-card {
   background: var(--surface);
@@ -393,138 +482,197 @@ h1.hero-title .neon { color: var(--accent); text-shadow: 0 0 40px var(--accent-g
   border-left: 2px solid var(--accent);
   padding: 2rem 1.5rem;
   transition: box-shadow 0.3s, transform 0.3s, background 0.3s;
-  position: relative;
-  overflow: hidden;
+  position: relative; overflow: hidden;
 }
 [dir="rtl"] .service-card { border-left: none; border-right: 2px solid var(--accent); }
 .service-card::after {
-  content: '';
-  position: absolute;
-  inset: 0;
+  content: ''; position: absolute; inset: 0;
   background: linear-gradient(135deg, var(--accent-dim) 0%, transparent 60%);
-  opacity: 0;
-  transition: opacity 0.3s;
+  opacity: 0; transition: opacity 0.3s;
 }
 .service-card:hover { box-shadow: 0 0 30px rgba(0,212,255,0.1), inset 0 0 20px var(--accent-dim); transform: translateY(-4px); background: var(--surface-hover); }
 [data-theme="light"] .service-card:hover { box-shadow: 0 8px 24px rgba(0,112,224,0.12); }
 .service-card:hover::after { opacity: 1; }
 .service-icon { font-size: 1.6rem; margin-bottom: 1.2rem; display: block; color: var(--accent); line-height: 1; }
 .service-name { font-size: 1.05rem; font-weight: 700; margin-bottom: 0.4rem; color: var(--text); }
-.service-price { font-family: 'Space Mono', monospace; font-size: 0.68rem; color: var(--accent); letter-spacing: 0.1em; margin-bottom: 1rem; font-weight: 700; }
+.service-price { font-family:'Space Mono',monospace;font-size:0.68rem;color:var(--accent);letter-spacing:0.1em;margin-bottom:1rem;font-weight:700; }
 .service-desc { font-size: 0.8rem; color: var(--text-muted); line-height: 1.75; }
-[data-lang="ar"] .service-desc { font-family: 'Cairo', sans-serif; font-size: 0.9rem; }
+[data-lang="ar"] .service-desc { font-family:'Cairo',sans-serif;font-size:0.9rem; }
+
+/* ─── PROJECTS ─── */
 .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 1.5rem; }
+
 .project-card {
   background: var(--surface);
   border: 1px solid var(--card-border);
   border-top: 2px solid var(--accent);
   padding: 2rem;
   transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
-  display: flex;
-  flex-direction: column;
+  display: flex; flex-direction: column;
 }
-.project-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-card), 0 0 20px var(--accent-dim); background: var(--surface-hover); }
+.project-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-card), 0 0 20px var(--accent-dim);
+  background: var(--surface-hover);
+}
+
+/* AI cards get violet top border */
+#ai-projects .project-card {
+  border-top: 2px solid var(--accent-ai);
+}
+#ai-projects .project-card:hover {
+  box-shadow: var(--shadow-card), 0 0 24px var(--accent-ai-dim);
+}
+
 .project-type {
   font-family: 'Space Mono', monospace;
-  font-size: 0.62rem;
-  color: var(--text-faint);
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
+  font-size: 0.62rem; color: var(--text-faint);
+  letter-spacing: 0.18em; text-transform: uppercase;
   margin-bottom: 0.6rem;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
+  display: flex; align-items: center; gap: 0.5rem;
 }
 .project-type i { color: var(--accent); font-size: 0.75rem; }
+#ai-projects .project-type i { color: var(--accent-ai); }
+
 .project-name { font-size: 1.4rem; font-weight: 700; margin-bottom: 1rem; color: var(--text); }
 [data-lang="ar"] .project-name { font-family: 'Cairo', sans-serif; }
 .project-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.2rem; }
+
 .tag {
   font-family: 'Space Mono', monospace;
-  font-size: 0.6rem;
-  letter-spacing: 0.1em;
+  font-size: 0.6rem; letter-spacing: 0.1em;
   color: var(--accent);
   border: 1px solid rgba(0,212,255,0.25);
   padding: 0.25rem 0.65rem;
   background: var(--tag-bg);
-  display: inline-flex;
-  align-items: center;
-  gap: 0.3rem;
+  display: inline-flex; align-items: center; gap: 0.3rem;
 }
 .tag i { font-size: 0.65rem; }
 [data-theme="light"] .tag { border-color: rgba(0,112,224,0.25); }
+
+/* AI tags get violet styling */
+#ai-projects .tag {
+  color: var(--accent-ai);
+  border-color: var(--accent-ai-border);
+  background: var(--tag-ai-bg);
+}
+
 .project-desc { font-size: 0.78rem; color: var(--text-muted); line-height: 1.75; flex: 1; margin-bottom: 1.5rem; }
 [data-lang="ar"] .project-desc { font-family: 'Cairo', sans-serif; font-size: 0.88rem; }
+
 .project-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
+  display: inline-flex; align-items: center; gap: 0.5rem;
   font-family: 'Space Mono', monospace;
-  font-size: 0.68rem;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: var(--accent);
-  text-decoration: none;
-  transition: gap 0.2s;
+  font-size: 0.68rem; letter-spacing: 0.15em;
+  text-transform: uppercase; color: var(--accent);
+  text-decoration: none; transition: gap 0.2s;
+  margin-top: auto;
 }
 .project-link:hover { gap: 0.85rem; }
 [dir="rtl"] .project-link .arrow-icon { transform: scaleX(-1); }
+#ai-projects .project-link { color: var(--accent-ai); }
+
+/* ─── "POWERED BY AI" BADGE on AI section ─── */
+.ai-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.58rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent-ai);
+  border: 1px solid var(--accent-ai-border);
+  background: var(--accent-ai-dim);
+  padding: 0.3rem 0.8rem;
+  margin-bottom: 2rem;
+  border-radius: 2px;
+}
+.ai-badge i { font-size: 0.65rem; animation: pulse-badge 2s ease-in-out infinite; }
+@keyframes pulse-badge { 0%,100%{opacity:1;} 50%{opacity:0.4;} }
+
+/* ─── CONTACT ─── */
 #contact { text-align: center; }
-.contact-title { font-size: clamp(2.2rem, 5.5vw, 5rem); font-weight: 800; margin-bottom: 1rem; line-height: 1.1; letter-spacing: -0.02em; }
-[data-lang="ar"] .contact-title { font-family: 'Cairo', sans-serif; font-weight: 900; }
+.contact-title { font-size: clamp(2.2rem,5.5vw,5rem); font-weight: 800; margin-bottom: 1rem; line-height: 1.1; letter-spacing: -0.02em; }
+[data-lang="ar"] .contact-title { font-family:'Cairo',sans-serif;font-weight:900; }
 .contact-title span { color: var(--accent); text-shadow: 0 0 40px var(--accent-glow); }
 .contact-sub { font-size: 0.78rem; color: var(--text-muted); margin-bottom: 3.5rem; letter-spacing: 0.06em; }
-[data-lang="ar"] .contact-sub { font-family: 'Cairo', sans-serif; font-size: 0.95rem; letter-spacing: 0; }
+[data-lang="ar"] .contact-sub { font-family:'Cairo',sans-serif;font-size:0.95rem;letter-spacing:0; }
 .contact-items { display: flex; flex-wrap: wrap; justify-content: center; gap: 3rem; margin-bottom: 3.5rem; }
 .contact-item { display: flex; flex-direction: column; align-items: center; gap: 0.5rem; }
 .contact-item-icon {
-  font-size: 1.4rem;
-  color: var(--accent);
-  margin-bottom: 0.3rem;
-  width: 48px;
-  height: 48px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid var(--accent-dim);
-  background: var(--accent-dim);
-  border-radius: 50%;
-  transition: box-shadow 0.2s, transform 0.2s;
+  font-size: 1.4rem; color: var(--accent);
+  margin-bottom: 0.3rem; width: 48px; height: 48px;
+  display: flex; align-items: center; justify-content: center;
+  border: 1px solid var(--accent-dim); background: var(--accent-dim);
+  border-radius: 50%; transition: box-shadow 0.2s, transform 0.2s;
 }
 .contact-item:hover .contact-item-icon { box-shadow: 0 0 20px var(--accent-glow); transform: scale(1.1); }
-.contact-item-label { font-family: 'Space Mono', monospace; font-size: 0.58rem; letter-spacing: 0.22em; color: var(--text-faint); text-transform: uppercase; }
+.contact-item-label { font-family:'Space Mono',monospace;font-size:0.58rem;letter-spacing:0.22em;color:var(--text-faint);text-transform:uppercase; }
 .contact-item-value { font-size: 0.82rem; color: var(--text); }
 .contact-item-value a { color: inherit; text-decoration: none; transition: color 0.2s; }
 .contact-item-value a:hover { color: var(--accent); }
+
+/* ─── BACK TO TOP ─── */
+#back-to-top {
+  position: fixed;
+  bottom: 2rem; right: 2rem;
+  width: 42px; height: 42px;
+  background: var(--accent-dim);
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; z-index: 50;
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.3s, transform 0.3s, box-shadow 0.3s;
+  font-size: 0.9rem;
+  border-radius: 2px;
+}
+[dir="rtl"] #back-to-top { right: auto; left: 2rem; }
+#back-to-top.visible { opacity: 1; pointer-events: auto; }
+#back-to-top:hover { box-shadow: 0 0 16px var(--accent-glow); transform: translateY(-3px); }
+
+/* ─── FOOTER ─── */
 footer {
-  position: relative;
-  z-index: 1;
+  position: relative; z-index: 1;
   border-top: 1px solid var(--footer-border);
   padding: 2rem 5%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 1rem;
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 1rem;
   transition: border-color var(--transition);
 }
-.footer-logo { font-family: 'Space Mono', monospace; font-size: 0.8rem; color: var(--text-muted); display: flex; align-items: center; gap: 0.4rem; }
+.footer-logo { font-family:'Space Mono',monospace;font-size:0.8rem;color:var(--text-muted);display:flex;align-items:center;gap:0.4rem; }
 .footer-logo span { color: var(--accent); }
-.footer-right { font-family: 'Space Mono', monospace; font-size: 0.68rem; color: var(--text-faint); letter-spacing: 0.05em; }
+.footer-right { font-family:'Space Mono',monospace;font-size:0.68rem;color:var(--text-faint);letter-spacing:0.05em; }
+
+/* ─── SCROLL ANIMATIONS ─── */
 .fade-in { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
 .fade-in.visible { opacity: 1; transform: translateY(0); }
 .fade-in-delay-1 { transition-delay: 0.1s; }
 .fade-in-delay-2 { transition-delay: 0.2s; }
 .fade-in-delay-3 { transition-delay: 0.3s; }
 .fade-in-delay-4 { transition-delay: 0.4s; }
-@keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-@keyframes pulse-line { 0%,100% { opacity: 0.3; } 50% { opacity: 0.7; } }
-@keyframes dash { to { stroke-dashoffset: -200; } }
+
+/* ─── REDUCED MOTION ─── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+  .fade-in { opacity: 1; transform: none; }
+  .particle { display: none; }
+}
+
+/* ─── KEYFRAMES ─── */
+@keyframes fadeUp { from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);} }
+@keyframes pulse-line { 0%,100%{opacity:0.3;}50%{opacity:0.7;} }
+@keyframes dash { to{stroke-dashoffset:-200;} }
 .animated-line { stroke-dasharray: 8 4; animation: dash 3s linear infinite; }
 .animated-line-slow { stroke-dasharray: 20 10; animation: dash 6s linear infinite; }
 .glow-pulse { animation: pulse-line 3s ease-in-out infinite; }
+
+/* ─── LANGUAGE CONTENT ─── */
 [data-lang="ar"] .lang-en { display: none; }
 [data-lang="en"] .lang-ar { display: none; }
+
+/* ─── RESPONSIVE ─── */
 @media (max-width: 768px) {
   .nav-links { display: none; }
   .hamburger { display: flex; }
@@ -532,6 +680,8 @@ footer {
   .hero-line { display: none; }
   .contact-items { gap: 2rem; }
   .stats-bar { gap: 2rem; }
+  #back-to-top { bottom: 1.5rem; right: 1.5rem; }
+  [dir="rtl"] #back-to-top { right: auto; left: 1.5rem; }
 }
 @media (max-width: 480px) {
   .hero-ctas { flex-direction: column; }
@@ -543,54 +693,78 @@ footer {
 </head>
 <body>
 
-<!-- TOP BAR -->
-<div class="top-bar">
-  <button class="top-btn active" id="btn-ar" onclick="setLang('ar')">
-    <i class="fa-solid fa-globe"></i> العربية
+<!-- Skip to content (accessibility) -->
+<a href="#services" class="skip-link">
+  <span class="lang-ar">تخطى إلى المحتوى</span>
+  <span class="lang-en">Skip to content</span>
+</a>
+
+<!-- Scroll progress bar -->
+<div id="scroll-progress" role="progressbar" aria-hidden="true"></div>
+
+<!-- ─── TOP BAR ─── -->
+<div class="top-bar" role="toolbar" aria-label="Language and theme controls">
+  <button class="top-btn active" id="btn-ar" onclick="setLang('ar')" aria-pressed="true" aria-label="Switch to Arabic">
+    <i class="fa-solid fa-globe" aria-hidden="true"></i> العربية
   </button>
-  <button class="top-btn" id="btn-en" onclick="setLang('en')">
-    <i class="fa-solid fa-earth-americas"></i> English
+  <button class="top-btn" id="btn-en" onclick="setLang('en')" aria-pressed="false" aria-label="Switch to English">
+    <i class="fa-solid fa-earth-americas" aria-hidden="true"></i> English
   </button>
-  <div class="top-divider"></div>
-  <button class="top-btn active" id="btn-dark" onclick="setTheme('dark')">
-    <i class="fa-solid fa-moon"></i> Dark
+  <div class="top-divider" role="separator"></div>
+  <button class="top-btn active" id="btn-dark" onclick="setTheme('dark')" aria-pressed="true" aria-label="Dark theme">
+    <i class="fa-solid fa-moon" aria-hidden="true"></i> Dark
   </button>
-  <button class="top-btn" id="btn-light" onclick="setTheme('light')">
-    <i class="fa-solid fa-sun"></i> Light
+  <button class="top-btn" id="btn-light" onclick="setTheme('light')" aria-pressed="false" aria-label="Light theme">
+    <i class="fa-solid fa-sun" aria-hidden="true"></i> Light
   </button>
 </div>
 
-<!-- NAVBAR -->
-<nav id="navbar">
-  <a class="nav-logo" href="#">
+<!-- ─── NAVBAR ─── -->
+<nav id="navbar" aria-label="Main navigation">
+  <a class="nav-logo" href="#" aria-label="Nuvarix home">
     <span>Nuvarix</span><span>.agency</span>
   </a>
-  <ul class="nav-links">
+  <ul class="nav-links" role="list">
     <li><a href="#services"><span class="lang-ar">الخدمات</span><span class="lang-en">Services</span></a></li>
     <li><a href="#projects"><span class="lang-ar">المشاريع</span><span class="lang-en">Projects</span></a></li>
-    <li><a href="#ai-projects"><span class="lang-ar">ذكاء اصطناعي</span><span class="lang-en">AI Tools</span></a></li>
+    <li class="nav-ai"><a href="#ai-projects"><span class="lang-ar">ذكاء اصطناعي</span><span class="lang-en">AI Tools</span></a></li>
     <li><a href="#contact"><span class="lang-ar">تواصل</span><span class="lang-en">Contact</span></a></li>
   </ul>
-  <button class="hamburger" id="hamburger" aria-label="Menu">
+  <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobile-menu">
     <span></span><span></span><span></span>
   </button>
 </nav>
 
+<!-- Mobile overlay backdrop -->
+<div class="mobile-overlay" id="mobile-overlay" aria-hidden="true"></div>
+
 <!-- MOBILE MENU -->
-<div class="mobile-menu" id="mobile-menu">
-  <a href="#services" onclick="closeMobile()"><span class="lang-ar">الخدمات</span><span class="lang-en">Services</span></a>
-  <a href="#projects" onclick="closeMobile()"><span class="lang-ar">المشاريع</span><span class="lang-en">Projects</span></a>
-  <a href="#ai-projects" onclick="closeMobile()"><span class="lang-ar">ذكاء اصطناعي</span><span class="lang-en">AI Tools</span></a>
-  <a href="#contact" onclick="closeMobile()"><span class="lang-ar">تواصل</span><span class="lang-en">Contact</span></a>
+<div class="mobile-menu" id="mobile-menu" role="navigation" aria-label="Mobile navigation">
+  <a href="#services" onclick="closeMobile()">
+    <i class="fa-solid fa-bolt-lightning" aria-hidden="true"></i>
+    <span class="lang-ar">الخدمات</span><span class="lang-en">Services</span>
+  </a>
+  <a href="#projects" onclick="closeMobile()">
+    <i class="fa-solid fa-code-branch" aria-hidden="true"></i>
+    <span class="lang-ar">المشاريع</span><span class="lang-en">Projects</span>
+  </a>
+  <a href="#ai-projects" onclick="closeMobile()" class="nav-ai-mobile">
+    <i class="fa-solid fa-microchip" aria-hidden="true"></i>
+    <span class="lang-ar">ذكاء اصطناعي</span><span class="lang-en">AI Tools</span>
+  </a>
+  <a href="#contact" onclick="closeMobile()">
+    <i class="fa-solid fa-paper-plane" aria-hidden="true"></i>
+    <span class="lang-ar">تواصل</span><span class="lang-en">Contact</span>
+  </a>
 </div>
 
-<!-- HERO -->
-<section id="hero">
+<!-- ─── HERO ─── -->
+<section id="hero" aria-label="Hero">
   <div class="corner-tl"></div>
   <div class="corner-tr"></div>
   <div class="corner-bl"></div>
   <div class="corner-br"></div>
-  <div id="particles"></div>
+  <div id="particles" aria-hidden="true"></div>
 
   <div class="hero-line" aria-hidden="true">
     <svg viewBox="0 0 500 400" fill="none">
@@ -622,12 +796,12 @@ footer {
     </p>
     <div class="hero-ctas">
       <a href="#projects" class="btn btn-primary">
-        <i class="fa-solid fa-rocket"></i>
+        <i class="fa-solid fa-rocket" aria-hidden="true"></i>
         <span class="lang-ar">استعرض المشاريع</span>
         <span class="lang-en">View Projects</span>
       </a>
       <a href="#contact" class="btn btn-outline">
-        <i class="fa-solid fa-paper-plane"></i>
+        <i class="fa-solid fa-paper-plane" aria-hidden="true"></i>
         <span class="lang-ar">تواصل معنا</span>
         <span class="lang-en">Contact Us</span>
       </a>
@@ -635,8 +809,8 @@ footer {
   </div>
 </section>
 
-<!-- STATS BAR -->
-<section style="padding: 0 5%; position: relative; z-index: 1;">
+<!-- ─── STATS BAR ─── -->
+<section style="padding: 0 5%; position: relative; z-index: 1;" aria-label="Statistics">
   <div class="stats-bar fade-in">
     <div class="stat-item">
       <div class="stat-number">3+</div>
@@ -657,13 +831,13 @@ footer {
   </div>
 </section>
 
-<!-- SERVICES -->
-<section id="services">
-  <p class="section-label fade-in">01 / <span class="lang-ar">الخدمات</span><span class="lang-en">Services</span></p>
+<!-- ─── SERVICES ─── -->
+<section id="services" aria-labelledby="services-heading">
+  <p class="section-label fade-in" id="services-heading">01 / <span class="lang-ar">الخدمات</span><span class="lang-en">Services</span></p>
   <div class="services-grid">
 
     <div class="service-card fade-in fade-in-delay-1">
-      <span class="service-icon"><i class="fa-solid fa-bolt-lightning"></i></span>
+      <span class="service-icon" aria-hidden="true"><i class="fa-solid fa-bolt-lightning"></i></span>
       <p class="service-name"><span class="lang-ar">صفحة هبوط</span><span class="lang-en">Landing Page</span></p>
       <p class="service-price"><span class="lang-ar">ابتداءً من 15,000 دج</span><span class="lang-en">From 15,000 DZD</span></p>
       <p class="service-desc">
@@ -673,7 +847,7 @@ footer {
     </div>
 
     <div class="service-card fade-in fade-in-delay-2">
-      <span class="service-icon"><i class="fa-solid fa-globe"></i></span>
+      <span class="service-icon" aria-hidden="true"><i class="fa-solid fa-globe"></i></span>
       <p class="service-name"><span class="lang-ar">موقع كامل</span><span class="lang-en">Full Website</span></p>
       <p class="service-price"><span class="lang-ar">ابتداءً من 40,000 دج</span><span class="lang-en">From 40,000 DZD</span></p>
       <p class="service-desc">
@@ -683,7 +857,7 @@ footer {
     </div>
 
     <div class="service-card fade-in fade-in-delay-3">
-      <span class="service-icon"><i class="fa-brands fa-flutter"></i></span>
+      <span class="service-icon" aria-hidden="true"><i class="fa-brands fa-flutter"></i></span>
       <p class="service-name"><span class="lang-ar">تطبيق Flutter</span><span class="lang-en">Flutter App</span></p>
       <p class="service-price"><span class="lang-ar">ابتداءً من 60,000 دج</span><span class="lang-en">From 60,000 DZD</span></p>
       <p class="service-desc">
@@ -693,7 +867,7 @@ footer {
     </div>
 
     <div class="service-card fade-in fade-in-delay-4">
-      <span class="service-icon"><i class="fa-solid fa-server"></i></span>
+      <span class="service-icon" aria-hidden="true"><i class="fa-solid fa-server"></i></span>
       <p class="service-name"><span class="lang-ar">Laravel API</span><span class="lang-en">Laravel API</span></p>
       <p class="service-price"><span class="lang-ar">ابتداءً من 30,000 دج</span><span class="lang-en">From 30,000 DZD</span></p>
       <p class="service-desc">
@@ -705,20 +879,20 @@ footer {
   </div>
 </section>
 
-<!-- PROJECTS -->
-<section id="projects">
-  <p class="section-label fade-in">02 / <span class="lang-ar">المشاريع</span><span class="lang-en">Projects</span></p>
+<!-- ─── PROJECTS ─── -->
+<section id="projects" aria-labelledby="projects-heading">
+  <p class="section-label fade-in" id="projects-heading">02 / <span class="lang-ar">المشاريع</span><span class="lang-en">Projects</span></p>
   <div class="projects-grid">
 
     <div class="project-card fade-in fade-in-delay-1">
       <p class="project-type">
-        <i class="fa-solid fa-utensils"></i>
+        <i class="fa-solid fa-utensils" aria-hidden="true"></i>
         <span class="lang-ar">موقع مطعم</span><span class="lang-en">Restaurant Website</span>
       </p>
       <h3 class="project-name">Dar Zitoun</h3>
-      <div class="project-tags">
-        <span class="tag"><i class="fa-brands fa-laravel"></i> Laravel</span>
-        <span class="tag"><i class="fa-brands fa-react"></i> React</span>
+      <div class="project-tags" aria-label="Technologies used">
+        <span class="tag"><i class="fa-brands fa-laravel" aria-hidden="true"></i> Laravel</span>
+        <span class="tag"><i class="fa-brands fa-react" aria-hidden="true"></i> React</span>
       </div>
       <p class="project-desc">
         <span class="lang-ar">موقع مطعم متكامل مع إدارة القائمة، نظام حجز طاولات، وتجربة معرض صور غامرة.</span>
@@ -726,18 +900,18 @@ footer {
       </p>
       <a href="projects/dar-zitoun-project.html" class="project-link">
         <span class="lang-ar">عرض المشروع</span><span class="lang-en">View Project</span>
-        <i class="fa-solid fa-arrow-right arrow-icon"></i>
+        <i class="fa-solid fa-arrow-right arrow-icon" aria-hidden="true"></i>
       </a>
     </div>
 
     <div class="project-card fade-in fade-in-delay-2">
       <p class="project-type">
-        <i class="fa-solid fa-shirt"></i>
+        <i class="fa-solid fa-shirt" aria-hidden="true"></i>
         <span class="lang-ar">تطبيق متجر ملابس</span><span class="lang-en">Clothing Store App</span>
       </p>
       <h3 class="project-name">Noor Store</h3>
-      <div class="project-tags">
-        <span class="tag"><i class="fa-brands fa-react"></i> React</span>
+      <div class="project-tags" aria-label="Technologies used">
+        <span class="tag"><i class="fa-brands fa-react" aria-hidden="true"></i> React</span>
       </div>
       <p class="project-desc">
         <span class="lang-ar">متجر ملابس بتصميم Mobile-first مع فلترة ذكية، سلة تسوق، وطلب سريع عبر واتساب.</span>
@@ -745,19 +919,19 @@ footer {
       </p>
       <a href="projects/noorstore.html" class="project-link">
         <span class="lang-ar">عرض المشروع</span><span class="lang-en">View Project</span>
-        <i class="fa-solid fa-arrow-right arrow-icon"></i>
+        <i class="fa-solid fa-arrow-right arrow-icon" aria-hidden="true"></i>
       </a>
     </div>
 
     <div class="project-card fade-in fade-in-delay-3">
       <p class="project-type">
-        <i class="fa-solid fa-boxes-stacked"></i>
+        <i class="fa-solid fa-boxes-stacked" aria-hidden="true"></i>
         <span class="lang-ar">لوحة إدارة مخزون</span><span class="lang-en">Inventory Dashboard</span>
       </p>
       <h3 class="project-name">StockPro DZ</h3>
-      <div class="project-tags">
-        <span class="tag"><i class="fa-brands fa-laravel"></i> Laravel</span>
-        <span class="tag"><i class="fa-brands fa-react"></i> React</span>
+      <div class="project-tags" aria-label="Technologies used">
+        <span class="tag"><i class="fa-brands fa-laravel" aria-hidden="true"></i> Laravel</span>
+        <span class="tag"><i class="fa-brands fa-react" aria-hidden="true"></i> React</span>
       </div>
       <p class="project-desc">
         <span class="lang-ar">لوحة تحكم متكاملة لإدارة المخزون مع تحليلات فورية، تقارير شاملة، ودعم متعدد المستودعات.</span>
@@ -765,7 +939,7 @@ footer {
       </p>
       <a href="projects/stockpro-dz-project.html" class="project-link">
         <span class="lang-ar">عرض المشروع</span><span class="lang-en">View Project</span>
-        <i class="fa-solid fa-arrow-right arrow-icon"></i>
+        <i class="fa-solid fa-arrow-right arrow-icon" aria-hidden="true"></i>
       </a>
     </div>
 
@@ -773,18 +947,25 @@ footer {
 </section>
 
 <!-- ─── AI PROJECTS ─── -->
-<section id="ai-projects">
-  <p class="section-label fade-in">03 / <span class="lang-ar">ذكاء اصطناعي</span><span class="lang-en">AI Tools</span></p>
+<section id="ai-projects" aria-labelledby="ai-heading">
+  <p class="section-label fade-in" id="ai-heading">03 / <span class="lang-ar">ذكاء اصطناعي</span><span class="lang-en">AI Tools</span></p>
+
+  <div class="ai-badge fade-in" aria-label="Powered by AI">
+    <i class="fa-solid fa-microchip" aria-hidden="true"></i>
+    <span class="lang-ar">مدعوم بالذكاء الاصطناعي · Groq AI</span>
+    <span class="lang-en">Powered by AI · Groq AI</span>
+  </div>
+
   <div class="projects-grid">
 
     <!-- Card 1: PDF Chatbot -->
     <div class="project-card fade-in fade-in-delay-1">
       <p class="project-type">
-        <i class="fa-solid fa-file-pdf"></i>
+        <i class="fa-solid fa-file-pdf" aria-hidden="true"></i>
         <span class="lang-ar">أداة ذكاء اصطناعي</span><span class="lang-en">AI Tool</span>
       </p>
       <h3 class="project-name">PDF Chatbot</h3>
-      <div class="project-tags">
+      <div class="project-tags" aria-label="Technologies used">
         <span class="tag">Python</span>
         <span class="tag">Groq AI</span>
         <span class="tag">Flask</span>
@@ -793,20 +974,20 @@ footer {
         <span class="lang-ar">بوت ذكي يقرأ أي ملف PDF ويجيب على أسئلتك منه فوراً — مثالي للشركات والمكتبات الرقمية.</span>
         <span class="lang-en">Intelligent chatbot that reads any PDF and answers questions instantly — ideal for businesses and digital libraries.</span>
       </p>
-      <a href="#" class="project-link">
+      <a href="/ai_tools/pdfchatbot.html" class="project-link" aria-label="View PDF Chatbot project">
         <span class="lang-ar">عرض المشروع</span><span class="lang-en">View Project</span>
-        <i class="fa-solid fa-arrow-right arrow-icon"></i>
+        <i class="fa-solid fa-arrow-right arrow-icon" aria-hidden="true"></i>
       </a>
     </div>
 
     <!-- Card 2: Email Automation -->
     <div class="project-card fade-in fade-in-delay-2">
       <p class="project-type">
-        <i class="fa-solid fa-envelope-open-text"></i>
+        <i class="fa-solid fa-envelope-open-text" aria-hidden="true"></i>
         <span class="lang-ar">أتمتة</span><span class="lang-en">Automation</span>
       </p>
       <h3 class="project-name">Email Automation</h3>
-      <div class="project-tags">
+      <div class="project-tags" aria-label="Technologies used">
         <span class="tag">Python</span>
         <span class="tag">Groq AI</span>
         <span class="tag">llama-3.3</span>
@@ -815,20 +996,20 @@ footer {
         <span class="lang-ar">نظام ذكي يقرأ الإيميلات الواردة ويولّد ردوداً احترافية تلقائياً بنبرة قابلة للتخصيص.</span>
         <span class="lang-en">Smart system that reads incoming emails and auto-generates professional replies with customizable tone.</span>
       </p>
-      <a href="#" class="project-link">
+      <a href="#" class="project-link" aria-label="View Email Automation project">
         <span class="lang-ar">عرض المشروع</span><span class="lang-en">View Project</span>
-        <i class="fa-solid fa-arrow-right arrow-icon"></i>
+        <i class="fa-solid fa-arrow-right arrow-icon" aria-hidden="true"></i>
       </a>
     </div>
 
     <!-- Card 3: Telegram Bot -->
     <div class="project-card fade-in fade-in-delay-3">
       <p class="project-type">
-        <i class="fa-brands fa-telegram"></i>
+        <i class="fa-brands fa-telegram" aria-hidden="true"></i>
         <span class="lang-ar">بوت ذكاء اصطناعي</span><span class="lang-en">AI Bot</span>
       </p>
       <h3 class="project-name">Telegram Bot</h3>
-      <div class="project-tags">
+      <div class="project-tags" aria-label="Technologies used">
         <span class="tag">Python</span>
         <span class="tag">Groq AI</span>
         <span class="tag">python-telegram-bot</span>
@@ -837,21 +1018,21 @@ footer {
         <span class="lang-ar">بوت تيليغرام ذكي للأعمال الصغيرة — يرد تلقائياً، يتذكر المحادثات، وجاهز للنشر الفوري.</span>
         <span class="lang-en">Smart Telegram bot for small businesses — auto-replies, remembers conversations, ready to deploy instantly.</span>
       </p>
-      <a href="#" class="project-link">
+      <a href="#" class="project-link" aria-label="View Telegram Bot project">
         <span class="lang-ar">عرض المشروع</span><span class="lang-en">View Project</span>
-        <i class="fa-solid fa-arrow-right arrow-icon"></i>
+        <i class="fa-solid fa-arrow-right arrow-icon" aria-hidden="true"></i>
       </a>
     </div>
 
   </div>
 </section>
 
-<!-- CONTACT -->
-<section id="contact">
+<!-- ─── CONTACT ─── -->
+<section id="contact" aria-labelledby="contact-heading">
   <div class="corner-tl"></div><div class="corner-tr"></div>
   <div class="corner-bl"></div><div class="corner-br"></div>
 
-  <p class="section-label fade-in" style="justify-content:center;">
+  <p class="section-label fade-in" style="justify-content:center;" id="contact-heading">
     04 / <span class="lang-ar">تواصل</span><span class="lang-en">Contact</span>
   </p>
 
@@ -866,35 +1047,35 @@ footer {
 
   <div class="contact-items fade-in">
     <div class="contact-item">
-      <div class="contact-item-icon"><i class="fa-brands fa-instagram"></i></div>
+      <div class="contact-item-icon" aria-hidden="true"><i class="fa-brands fa-instagram"></i></div>
       <p class="contact-item-label">Instagram</p>
-      <p class="contact-item-value"><a href="https://instagram.com/nuvarix1" target="_blank" rel="noopener">@nuvarix</a></p>
+      <p class="contact-item-value"><a href="https://instagram.com/nuvarix1" target="_blank" rel="noopener noreferrer" aria-label="Nuvarix on Instagram">@nuvarix</a></p>
     </div>
     <div class="contact-item">
-      <div class="contact-item-icon"><i class="fa-solid fa-envelope"></i></div>
+      <div class="contact-item-icon" aria-hidden="true"><i class="fa-solid fa-envelope"></i></div>
       <p class="contact-item-label">Email</p>
-      <p class="contact-item-value"><a href="mailto:nuvarix.agency@gmail.com">nuvarix.agency@gmail.com</a></p>
+      <p class="contact-item-value"><a href="mailto:nuvarix.agency@gmail.com" aria-label="Send email to Nuvarix">nuvarix.agency@gmail.com</a></p>
     </div>
     <div class="contact-item">
-      <div class="contact-item-icon"><i class="fa-solid fa-location-dot"></i></div>
+      <div class="contact-item-icon" aria-hidden="true"><i class="fa-solid fa-location-dot"></i></div>
       <p class="contact-item-label"><span class="lang-ar">الموقع</span><span class="lang-en">Location</span></p>
       <p class="contact-item-value">Saïda, Algeria 🇩🇿</p>
     </div>
   </div>
 
   <div class="fade-in">
-    <a href="https://instagram.com/nuvarix1" class="btn btn-primary" target="_blank" rel="noopener">
-      <i class="fa-brands fa-instagram"></i>
+    <a href="https://instagram.com/nuvarix1" class="btn btn-primary" target="_blank" rel="noopener noreferrer">
+      <i class="fa-brands fa-instagram" aria-hidden="true"></i>
       <span class="lang-ar">أرسل رسالة مباشرة</span>
       <span class="lang-en">Send us a DM</span>
     </a>
   </div>
 </section>
 
-<!-- FOOTER -->
-<footer>
+<!-- ─── FOOTER ─── -->
+<footer role="contentinfo">
   <div class="footer-logo">
-    <i class="fa-solid fa-code" style="color:var(--accent);font-size:0.85rem;"></i>
+    <i class="fa-solid fa-code" style="color:var(--accent);font-size:0.85rem;" aria-hidden="true"></i>
     <span>Nuvarix</span>.agency
   </div>
   <div class="footer-right">
@@ -903,18 +1084,28 @@ footer {
   </div>
 </footer>
 
+<!-- ─── BACK TO TOP ─── -->
+<button id="back-to-top" aria-label="Back to top" title="Back to top">
+  <i class="fa-solid fa-chevron-up" aria-hidden="true"></i>
+</button>
+
 <script>
+/* ── Year ── */
 const y = new Date().getFullYear();
 document.getElementById('year').textContent = y;
 document.getElementById('year2').textContent = y;
 
+/* ── Theme ── */
 function setTheme(t) {
   document.documentElement.setAttribute('data-theme', t);
   localStorage.setItem('nv-theme', t);
   document.getElementById('btn-dark').classList.toggle('active', t === 'dark');
   document.getElementById('btn-light').classList.toggle('active', t === 'light');
+  document.getElementById('btn-dark').setAttribute('aria-pressed', t === 'dark');
+  document.getElementById('btn-light').setAttribute('aria-pressed', t === 'light');
 }
 
+/* ── Lang ── */
 function setLang(l) {
   document.documentElement.setAttribute('data-lang', l);
   document.documentElement.setAttribute('lang', l);
@@ -922,8 +1113,11 @@ function setLang(l) {
   localStorage.setItem('nv-lang', l);
   document.getElementById('btn-ar').classList.toggle('active', l === 'ar');
   document.getElementById('btn-en').classList.toggle('active', l === 'en');
+  document.getElementById('btn-ar').setAttribute('aria-pressed', l === 'ar');
+  document.getElementById('btn-en').setAttribute('aria-pressed', l === 'en');
 }
 
+/* ── Init ── */
 (function() {
   const savedTheme = localStorage.getItem('nv-theme') || 'dark';
   const savedLang  = localStorage.getItem('nv-lang')  || 'ar';
@@ -931,37 +1125,102 @@ function setLang(l) {
   setLang(savedLang);
 })();
 
+/* ── Navbar scroll + progress bar ── */
 const navbar = document.getElementById('navbar');
+const progressBar = document.getElementById('scroll-progress');
+const backToTop = document.getElementById('back-to-top');
+
 window.addEventListener('scroll', () => {
-  navbar.classList.toggle('scrolled', window.scrollY > 20);
+  const scrolled = window.scrollY;
+  navbar.classList.toggle('scrolled', scrolled > 20);
+
+  // Progress bar
+  const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+  progressBar.style.width = (scrolled / docHeight * 100) + '%';
+
+  // Back to top button
+  backToTop.classList.toggle('visible', scrolled > 400);
+}, { passive: true });
+
+backToTop.addEventListener('click', () => {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 });
 
+/* ── Mobile menu ── */
 const hamburger = document.getElementById('hamburger');
 const mobileMenu = document.getElementById('mobile-menu');
-hamburger.addEventListener('click', () => {
-  hamburger.classList.toggle('active');
-  mobileMenu.classList.toggle('open');
-});
+const mobileOverlay = document.getElementById('mobile-overlay');
+
+function openMobile() {
+  hamburger.classList.add('active');
+  mobileMenu.classList.add('open');
+  mobileOverlay.classList.add('open');
+  mobileOverlay.removeAttribute('aria-hidden');
+  hamburger.setAttribute('aria-expanded', 'true');
+  document.body.style.overflow = 'hidden';
+}
+
 function closeMobile() {
   hamburger.classList.remove('active');
   mobileMenu.classList.remove('open');
+  mobileOverlay.classList.remove('open');
+  mobileOverlay.setAttribute('aria-hidden', 'true');
+  hamburger.setAttribute('aria-expanded', 'false');
+  document.body.style.overflow = '';
 }
 
+hamburger.addEventListener('click', () => {
+  hamburger.classList.contains('active') ? closeMobile() : openMobile();
+});
+
+mobileOverlay.addEventListener('click', closeMobile);
+
+// Close on Escape key
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && mobileMenu.classList.contains('open')) closeMobile();
+});
+
+/* ── Active nav link on scroll ── */
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.nav-links a[href^="#"]');
+
+const navObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      navLinks.forEach(link => {
+        const active = link.getAttribute('href') === '#' + entry.target.id;
+        link.toggleAttribute('aria-current', active);
+        if (active) link.setAttribute('aria-current', 'page');
+        else link.removeAttribute('aria-current');
+      });
+    }
+  });
+}, { threshold: 0.4 });
+
+sections.forEach(s => navObserver.observe(s));
+
+/* ── Fade-in on scroll (improved threshold) ── */
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-}, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+}, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+
 document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
+/* ── Particles ── */
 const container = document.getElementById('particles');
-for (let i = 0; i < 30; i++) {
-  const p = document.createElement('div');
-  p.className = 'particle';
-  const x = Math.random() * 100;
-  const dur = 8 + Math.random() * 16;
-  const delay = -Math.random() * 20;
-  const dx = (Math.random() - 0.5) * 120 + 'px';
-  p.style.cssText = `left:${x}%;bottom:-10px;animation-duration:${dur}s;animation-delay:${delay}s;--dx:${dx};width:${1+Math.random()*2}px;height:${1+Math.random()*2}px;`;
-  container.appendChild(p);
+// Respect reduced motion
+if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  for (let i = 0; i < 30; i++) {
+    const p = document.createElement('div');
+    p.className = 'particle';
+    p.setAttribute('aria-hidden', 'true');
+    const x = Math.random() * 100;
+    const dur = 8 + Math.random() * 16;
+    const delay = -Math.random() * 20;
+    const dx = (Math.random() - 0.5) * 120 + 'px';
+    p.style.cssText = `left:${x}%;bottom:-10px;animation-duration:${dur}s;animation-delay:${delay}s;--dx:${dx};width:${1+Math.random()*2}px;height:${1+Math.random()*2}px;`;
+    container.appendChild(p);
+  }
 }
 </script>
 </body>
