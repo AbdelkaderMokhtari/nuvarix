@@ -8,7 +8,7 @@
 <title>Nuvarix — وكالة تطوير الويب والموبايل</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;700;800&family=Cairo:wght@300;400;500;600;700;900&display=swap&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;700;800&family=Cairo:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <style>
 /* ═══════════════════════════════════════════
@@ -24,7 +24,6 @@
   --accent: #00D4FF;
   --accent-dim: rgba(0,212,255,0.12);
   --accent-glow: rgba(0,212,255,0.4);
-  /* AI section accent — violet to differentiate */
   --accent-ai: #A78BFA;
   --accent-ai-dim: rgba(167,139,250,0.12);
   --accent-ai-glow: rgba(167,139,250,0.35);
@@ -93,10 +92,6 @@ body {
   transition: background var(--transition), color var(--transition);
 }
 
-<<<<<<< HEAD
-=======
-/* font-display via JS-free approach — added to @font-face override */
->>>>>>> 4344267aa21d7c83d4ca8f5c16fa0688ee6034e7
 @font-face { font-family: 'Cairo'; font-display: swap; }
 @font-face { font-family: 'Space Mono'; font-display: swap; }
 @font-face { font-family: 'Syne'; font-display: swap; }
@@ -122,7 +117,6 @@ body {
 [data-lang="en"] .project-name,
 [data-lang="en"] .contact-title { font-family: 'Syne', sans-serif; }
 
-/* Grid background */
 body::before {
   content: '';
   position: fixed; inset: 0;
@@ -134,7 +128,6 @@ body::before {
   transition: background-image var(--transition);
 }
 
-/* Scanlines */
 body::after {
   content: '';
   position: fixed; inset: 0;
@@ -142,20 +135,12 @@ body::after {
   pointer-events: none; z-index: 0;
 }
 
-<<<<<<< HEAD
-=======
-/* ─── FOCUS STYLES (accessibility) ─── */
->>>>>>> 4344267aa21d7c83d4ca8f5c16fa0688ee6034e7
 :focus-visible {
   outline: none;
   box-shadow: var(--focus-ring);
   border-radius: 2px;
 }
 
-<<<<<<< HEAD
-=======
-/* ─── SKIP LINK ─── */
->>>>>>> 4344267aa21d7c83d4ca8f5c16fa0688ee6034e7
 .skip-link {
   position: fixed;
   top: -100%;
@@ -173,10 +158,6 @@ body::after {
 }
 .skip-link:focus { top: 0; }
 
-<<<<<<< HEAD
-=======
-/* ─── TOP BAR ─── */
->>>>>>> 4344267aa21d7c83d4ca8f5c16fa0688ee6034e7
 .top-bar {
   position: fixed;
   top: 0; left: 0; right: 0;
@@ -212,10 +193,6 @@ body::after {
 .top-btn.active { background: var(--accent-dim); border-color: var(--accent); color: var(--accent); }
 .top-divider { width: 1px; height: 14px; background: var(--card-border); }
 
-<<<<<<< HEAD
-=======
-/* ─── NAVBAR ─── */
->>>>>>> 4344267aa21d7c83d4ca8f5c16fa0688ee6034e7
 nav {
   position: fixed;
   top: 36px; left: 0; right: 0;
@@ -272,10 +249,6 @@ nav.scrolled {
 .nav-links a:hover::after,
 .nav-links a[aria-current="page"]::after { transform: scaleX(1); }
 
-<<<<<<< HEAD
-=======
-/* AI nav link gets violet underline */
->>>>>>> 4344267aa21d7c83d4ca8f5c16fa0688ee6034e7
 .nav-links .nav-ai a { color: var(--text-muted); }
 .nav-links .nav-ai a::after { background: var(--accent-ai); }
 .nav-links .nav-ai a:hover { color: var(--accent-ai); }
@@ -298,10 +271,6 @@ nav.scrolled {
 .hamburger.active span:nth-child(2) { opacity: 0; }
 .hamburger.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
-<<<<<<< HEAD
-=======
-/* Mobile menu with backdrop overlay */
->>>>>>> 4344267aa21d7c83d4ca8f5c16fa0688ee6034e7
 .mobile-overlay {
   display: none;
   position: fixed;
@@ -347,10 +316,6 @@ nav.scrolled {
 .mobile-menu a.nav-ai-mobile:hover { color: var(--accent-ai); background: var(--accent-ai-dim); }
 .mobile-menu a i { font-size: 0.8rem; width: 16px; text-align: center; }
 
-<<<<<<< HEAD
-=======
-/* ─── SECTION BASE ─── */
->>>>>>> 4344267aa21d7c83d4ca8f5c16fa0688ee6034e7
 section { position: relative; z-index: 1; padding: 7rem 5%; }
 
 .section-label {
@@ -369,10 +334,6 @@ section { position: relative; z-index: 1; padding: 7rem 5%; }
   height: 1px; background: var(--accent); opacity: 0.4;
 }
 
-<<<<<<< HEAD
-=======
-/* AI section label uses violet */
->>>>>>> 4344267aa21d7c83d4ca8f5c16fa0688ee6034e7
 #ai-projects .section-label { color: var(--accent-ai); }
 #ai-projects .section-label::after { background: var(--accent-ai); }
 
@@ -393,7 +354,7 @@ section { position: relative; z-index: 1; padding: 7rem 5%; }
   padding-bottom: 4rem;
   overflow: hidden;
 }
-.hero-inner { max-width: 820px; }
+.hero-inner { max-width: 820px; position: relative; z-index: 1; }
 
 .hero-eyebrow {
   font-family: 'Space Mono', monospace;
@@ -433,7 +394,6 @@ h1.hero-title .neon { color: var(--accent); text-shadow: 0 0 40px var(--accent-g
 .hero-ctas {
   display: flex; gap: 1rem; flex-wrap: wrap;
   opacity: 0; animation: fadeUp 0.8s 0.8s forwards;
-<<<<<<< HEAD
 }
 
 #scroll-progress {
@@ -448,24 +408,6 @@ h1.hero-title .neon { color: var(--accent); text-shadow: 0 0 40px var(--accent-g
   pointer-events: none;
 }
 
-=======
-}
-
-/* ─── SCROLL PROGRESS BAR ─── */
-#scroll-progress {
-  position: fixed;
-  top: 36px;
-  left: 0;
-  height: 2px;
-  width: 0%;
-  background: linear-gradient(90deg, var(--accent), var(--accent-ai));
-  z-index: 101;
-  transition: width 0.1s linear;
-  pointer-events: none;
-}
-
-/* ─── BUTTONS ─── */
->>>>>>> 4344267aa21d7c83d4ca8f5c16fa0688ee6034e7
 .btn {
   display: inline-flex; align-items: center; gap: 0.5rem;
   font-family: 'Space Mono', monospace;
@@ -480,10 +422,6 @@ h1.hero-title .neon { color: var(--accent); text-shadow: 0 0 40px var(--accent-g
 .btn-outline { background: transparent; color: var(--text); border: 1px solid var(--btn-outline-border); }
 .btn-outline:hover { border-color: var(--accent); color: var(--accent); box-shadow: 0 0 20px var(--accent-dim); transform: translateY(-2px); }
 
-<<<<<<< HEAD
-=======
-/* ─── HERO SVG ─── */
->>>>>>> 4344267aa21d7c83d4ca8f5c16fa0688ee6034e7
 .hero-line {
   position: absolute; right: 0; top: 50%;
   transform: translateY(-50%);
@@ -493,12 +431,7 @@ h1.hero-title .neon { color: var(--accent); text-shadow: 0 0 40px var(--accent-g
 [data-theme="light"] .hero-line { opacity: 0.25; }
 .hero-line svg { width: 100%; height: 100%; }
 
-<<<<<<< HEAD
-=======
-/* ─── PARTICLES ─── */
->>>>>>> 4344267aa21d7c83d4ca8f5c16fa0688ee6034e7
 #particles { position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: 0; }
-.hero-inner { position: relative; z-index: 1; }
 .particle {
   position: absolute; width: 2px; height: 2px;
   background: var(--accent); border-radius: 50%;
@@ -522,10 +455,6 @@ h1.hero-title .neon { color: var(--accent); text-shadow: 0 0 40px var(--accent-g
 .stat-label { font-size:0.7rem;color:var(--text-muted);letter-spacing:0.1em;text-transform:uppercase;margin-top:4px; }
 [data-lang="ar"] .stat-label { font-family:'Cairo',sans-serif;letter-spacing:0; }
 
-<<<<<<< HEAD
-=======
-/* ─── SERVICES ─── */
->>>>>>> 4344267aa21d7c83d4ca8f5c16fa0688ee6034e7
 .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 1.5rem; }
 .service-card {
   background: var(--surface);
@@ -550,10 +479,6 @@ h1.hero-title .neon { color: var(--accent); text-shadow: 0 0 40px var(--accent-g
 .service-desc { font-size: 0.8rem; color: var(--text-muted); line-height: 1.75; }
 [data-lang="ar"] .service-desc { font-family:'Cairo',sans-serif;font-size:0.9rem; }
 
-<<<<<<< HEAD
-=======
-/* ─── PROJECTS ─── */
->>>>>>> 4344267aa21d7c83d4ca8f5c16fa0688ee6034e7
 .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 1.5rem; }
 
 .project-card {
@@ -570,16 +495,8 @@ h1.hero-title .neon { color: var(--accent); text-shadow: 0 0 40px var(--accent-g
   background: var(--surface-hover);
 }
 
-<<<<<<< HEAD
-=======
-/* AI cards get violet top border */
->>>>>>> 4344267aa21d7c83d4ca8f5c16fa0688ee6034e7
-#ai-projects .project-card {
-  border-top: 2px solid var(--accent-ai);
-}
-#ai-projects .project-card:hover {
-  box-shadow: var(--shadow-card), 0 0 24px var(--accent-ai-dim);
-}
+#ai-projects .project-card { border-top: 2px solid var(--accent-ai); }
+#ai-projects .project-card:hover { box-shadow: var(--shadow-card), 0 0 24px var(--accent-ai-dim); }
 
 .project-type {
   font-family: 'Space Mono', monospace;
@@ -607,10 +524,6 @@ h1.hero-title .neon { color: var(--accent); text-shadow: 0 0 40px var(--accent-g
 .tag i { font-size: 0.65rem; }
 [data-theme="light"] .tag { border-color: rgba(0,112,224,0.25); }
 
-<<<<<<< HEAD
-=======
-/* AI tags get violet styling */
->>>>>>> 4344267aa21d7c83d4ca8f5c16fa0688ee6034e7
 #ai-projects .tag {
   color: var(--accent-ai);
   border-color: var(--accent-ai-border);
@@ -632,10 +545,6 @@ h1.hero-title .neon { color: var(--accent); text-shadow: 0 0 40px var(--accent-g
 [dir="rtl"] .project-link .arrow-icon { transform: scaleX(-1); }
 #ai-projects .project-link { color: var(--accent-ai); }
 
-<<<<<<< HEAD
-=======
-/* ─── "POWERED BY AI" BADGE on AI section ─── */
->>>>>>> 4344267aa21d7c83d4ca8f5c16fa0688ee6034e7
 .ai-badge {
   display: inline-flex;
   align-items: center;
@@ -654,10 +563,6 @@ h1.hero-title .neon { color: var(--accent); text-shadow: 0 0 40px var(--accent-g
 .ai-badge i { font-size: 0.65rem; animation: pulse-badge 2s ease-in-out infinite; }
 @keyframes pulse-badge { 0%,100%{opacity:1;} 50%{opacity:0.4;} }
 
-<<<<<<< HEAD
-=======
-/* ─── CONTACT ─── */
->>>>>>> 4344267aa21d7c83d4ca8f5c16fa0688ee6034e7
 #contact { text-align: center; }
 .contact-title { font-size: clamp(2.2rem,5.5vw,5rem); font-weight: 800; margin-bottom: 1rem; line-height: 1.1; letter-spacing: -0.02em; }
 [data-lang="ar"] .contact-title { font-family:'Cairo',sans-serif;font-weight:900; }
@@ -679,10 +584,6 @@ h1.hero-title .neon { color: var(--accent); text-shadow: 0 0 40px var(--accent-g
 .contact-item-value a { color: inherit; text-decoration: none; transition: color 0.2s; }
 .contact-item-value a:hover { color: var(--accent); }
 
-<<<<<<< HEAD
-=======
-/* ─── BACK TO TOP ─── */
->>>>>>> 4344267aa21d7c83d4ca8f5c16fa0688ee6034e7
 #back-to-top {
   position: fixed;
   bottom: 2rem; right: 2rem;
@@ -701,10 +602,6 @@ h1.hero-title .neon { color: var(--accent); text-shadow: 0 0 40px var(--accent-g
 #back-to-top.visible { opacity: 1; pointer-events: auto; }
 #back-to-top:hover { box-shadow: 0 0 16px var(--accent-glow); transform: translateY(-3px); }
 
-<<<<<<< HEAD
-=======
-/* ─── FOOTER ─── */
->>>>>>> 4344267aa21d7c83d4ca8f5c16fa0688ee6034e7
 footer {
   position: relative; z-index: 1;
   border-top: 1px solid var(--footer-border);
@@ -717,10 +614,6 @@ footer {
 .footer-logo span { color: var(--accent); }
 .footer-right { font-family:'Space Mono',monospace;font-size:0.68rem;color:var(--text-faint);letter-spacing:0.05em; }
 
-<<<<<<< HEAD
-=======
-/* ─── SCROLL ANIMATIONS ─── */
->>>>>>> 4344267aa21d7c83d4ca8f5c16fa0688ee6034e7
 .fade-in { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
 .fade-in.visible { opacity: 1; transform: translateY(0); }
 .fade-in-delay-1 { transition-delay: 0.1s; }
@@ -728,20 +621,12 @@ footer {
 .fade-in-delay-3 { transition-delay: 0.3s; }
 .fade-in-delay-4 { transition-delay: 0.4s; }
 
-<<<<<<< HEAD
-=======
-/* ─── REDUCED MOTION ─── */
->>>>>>> 4344267aa21d7c83d4ca8f5c16fa0688ee6034e7
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
   .fade-in { opacity: 1; transform: none; }
   .particle { display: none; }
 }
 
-<<<<<<< HEAD
-=======
-/* ─── KEYFRAMES ─── */
->>>>>>> 4344267aa21d7c83d4ca8f5c16fa0688ee6034e7
 @keyframes fadeUp { from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);} }
 @keyframes pulse-line { 0%,100%{opacity:0.3;}50%{opacity:0.7;} }
 @keyframes dash { to{stroke-dashoffset:-200;} }
@@ -772,24 +657,15 @@ footer {
 </head>
 <body>
 
-<<<<<<< HEAD
-=======
-<!-- Skip to content (accessibility) -->
->>>>>>> 4344267aa21d7c83d4ca8f5c16fa0688ee6034e7
 <a href="#services" class="skip-link">
   <span class="lang-ar">تخطى إلى المحتوى</span>
   <span class="lang-en">Skip to content</span>
 </a>
 
-<<<<<<< HEAD
-<div id="scroll-progress" role="progressbar" aria-hidden="true"></div>
-
-=======
 <!-- Scroll progress bar -->
 <div id="scroll-progress" role="progressbar" aria-hidden="true"></div>
 
 <!-- ─── TOP BAR ─── -->
->>>>>>> 4344267aa21d7c83d4ca8f5c16fa0688ee6034e7
 <div class="top-bar" role="toolbar" aria-label="Language and theme controls">
   <button class="top-btn active" id="btn-ar" onclick="setLang('ar')" aria-pressed="true" aria-label="Switch to Arabic">
     <i class="fa-solid fa-globe" aria-hidden="true"></i> العربية
@@ -806,10 +682,6 @@ footer {
   </button>
 </div>
 
-<<<<<<< HEAD
-=======
-<!-- ─── NAVBAR ─── -->
->>>>>>> 4344267aa21d7c83d4ca8f5c16fa0688ee6034e7
 <nav id="navbar" aria-label="Main navigation">
   <a class="nav-logo" href="#" aria-label="Nuvarix home">
     <span>Nuvarix</span><span>.agency</span>
@@ -825,15 +697,8 @@ footer {
   </button>
 </nav>
 
-<<<<<<< HEAD
 <div class="mobile-overlay" id="mobile-overlay" aria-hidden="true"></div>
 
-=======
-<!-- Mobile overlay backdrop -->
-<div class="mobile-overlay" id="mobile-overlay" aria-hidden="true"></div>
-
-<!-- MOBILE MENU -->
->>>>>>> 4344267aa21d7c83d4ca8f5c16fa0688ee6034e7
 <div class="mobile-menu" id="mobile-menu" role="navigation" aria-label="Mobile navigation">
   <a href="#services" onclick="closeMobile()">
     <i class="fa-solid fa-bolt-lightning" aria-hidden="true"></i>
@@ -853,10 +718,6 @@ footer {
   </a>
 </div>
 
-<<<<<<< HEAD
-=======
-<!-- ─── HERO ─── -->
->>>>>>> 4344267aa21d7c83d4ca8f5c16fa0688ee6034e7
 <section id="hero" aria-label="Hero">
   <div class="corner-tl"></div>
   <div class="corner-tr"></div>
@@ -907,10 +768,6 @@ footer {
   </div>
 </section>
 
-<<<<<<< HEAD
-=======
-<!-- ─── STATS BAR ─── -->
->>>>>>> 4344267aa21d7c83d4ca8f5c16fa0688ee6034e7
 <section style="padding: 0 5%; position: relative; z-index: 1;" aria-label="Statistics">
   <div class="stats-bar fade-in">
     <div class="stat-item">
@@ -980,11 +837,7 @@ footer {
   </div>
 </section>
 
-<<<<<<< HEAD
-<!-- ─── PROJECTS (real case studies) ─── -->
-=======
 <!-- ─── PROJECTS ─── -->
->>>>>>> 4344267aa21d7c83d4ca8f5c16fa0688ee6034e7
 <section id="projects" aria-labelledby="projects-heading">
   <p class="section-label fade-in" id="projects-heading">02 / <span class="lang-ar">المشاريع</span><span class="lang-en">Projects</span></p>
   <div class="projects-grid">
@@ -992,7 +845,6 @@ footer {
     <!-- SmartTap -->
     <div class="project-card fade-in fade-in-delay-1">
       <p class="project-type">
-<<<<<<< HEAD
         <i class="fa-solid fa-qrcode" aria-hidden="true"></i>
         <span class="lang-ar">SaaS للمطاعم</span><span class="lang-en">Restaurant SaaS</span>
       </p>
@@ -1002,27 +854,13 @@ footer {
         <span class="tag">MySQL</span>
         <span class="tag">QR Code</span>
         <span class="tag">Subscriptions</span>
-=======
-        <i class="fa-solid fa-utensils" aria-hidden="true"></i>
-        <span class="lang-ar">موقع مطعم</span><span class="lang-en">Restaurant Website</span>
-      </p>
-      <h3 class="project-name">Dar Zitoun</h3>
-      <div class="project-tags" aria-label="Technologies used">
-        <span class="tag"><i class="fa-brands fa-laravel" aria-hidden="true"></i> Laravel</span>
-        <span class="tag"><i class="fa-brands fa-react" aria-hidden="true"></i> React</span>
->>>>>>> 4344267aa21d7c83d4ca8f5c16fa0688ee6034e7
       </div>
       <p class="project-desc">
         <span class="lang-ar">منصة SaaS لأصحاب المطاعم مع اشتراكات شهرية وسنوية ومدى الحياة، والتسعير يتغير حسب عدد الطاولات. كل طاولة توفّر QR code يخلي الزبون يتصفح القائمة ويطلب من هاتفه مباشرة.</span>
         <span class="lang-en">A SaaS platform for restaurants: owners subscribe monthly, yearly, or for life, with pricing that scales by table count. Each table gets a QR code so customers can browse the menu and order straight from their phone.</span>
       </p>
-<<<<<<< HEAD
       <a href="https://abdelkader-mokhtari.netlify.app/pages/smarttap" class="project-link" target="_blank" rel="noopener noreferrer" aria-label="View SmartTap case study">
         <span class="lang-ar">دراسة الحالة</span><span class="lang-en">Case Study</span>
-=======
-      <a href="projects/dar-zitoun-project.html" class="project-link">
-        <span class="lang-ar">عرض المشروع</span><span class="lang-en">View Project</span>
->>>>>>> 4344267aa21d7c83d4ca8f5c16fa0688ee6034e7
         <i class="fa-solid fa-arrow-right arrow-icon" aria-hidden="true"></i>
       </a>
     </div>
@@ -1030,7 +868,6 @@ footer {
     <!-- EcoCity -->
     <div class="project-card fade-in fade-in-delay-2">
       <p class="project-type">
-<<<<<<< HEAD
         <i class="fa-solid fa-leaf" aria-hidden="true"></i>
         <span class="lang-ar">مشروع تخرج</span><span class="lang-en">Graduation Project</span>
       </p>
@@ -1039,26 +876,13 @@ footer {
         <span class="tag"><i class="fa-brands fa-flutter" aria-hidden="true"></i> Flutter</span>
         <span class="tag"><i class="fa-brands fa-laravel" aria-hidden="true"></i> Laravel</span>
         <span class="tag">Geolocation</span>
-=======
-        <i class="fa-solid fa-shirt" aria-hidden="true"></i>
-        <span class="lang-ar">تطبيق متجر ملابس</span><span class="lang-en">Clothing Store App</span>
-      </p>
-      <h3 class="project-name">Noor Store</h3>
-      <div class="project-tags" aria-label="Technologies used">
-        <span class="tag"><i class="fa-brands fa-react" aria-hidden="true"></i> React</span>
->>>>>>> 4344267aa21d7c83d4ca8f5c16fa0688ee6034e7
       </div>
       <p class="project-desc">
         <span class="lang-ar">تطبيق موبايل يخلي المواطنين يبلّغوا عن مشاكل النفايات والبنية التحتية العامة مباشرة للبلدية، ويربط بين السكان وخدمات المدينة.</span>
         <span class="lang-en">A mobile app that lets citizens report waste and broken public infrastructure directly to their municipality, closing the loop between residents and city services.</span>
       </p>
-<<<<<<< HEAD
       <a href="https://abdelkader-mokhtari.netlify.app/pages/ecocity" class="project-link" target="_blank" rel="noopener noreferrer" aria-label="View EcoCity case study">
         <span class="lang-ar">دراسة الحالة</span><span class="lang-en">Case Study</span>
-=======
-      <a href="projects/noorstore.html" class="project-link">
-        <span class="lang-ar">عرض المشروع</span><span class="lang-en">View Project</span>
->>>>>>> 4344267aa21d7c83d4ca8f5c16fa0688ee6034e7
         <i class="fa-solid fa-arrow-right arrow-icon" aria-hidden="true"></i>
       </a>
     </div>
@@ -1066,7 +890,6 @@ footer {
     <!-- Freelance Systems -->
     <div class="project-card fade-in fade-in-delay-3">
       <p class="project-type">
-<<<<<<< HEAD
         <i class="fa-solid fa-briefcase" aria-hidden="true"></i>
         <span class="lang-ar">أعمال العملاء</span><span class="lang-en">Client Work</span>
       </p>
@@ -1076,27 +899,13 @@ footer {
         <span class="tag">MySQL</span>
         <span class="tag">Tailwind</span>
         <span class="tag">HTML/CSS/JS</span>
-=======
-        <i class="fa-solid fa-boxes-stacked" aria-hidden="true"></i>
-        <span class="lang-ar">لوحة إدارة مخزون</span><span class="lang-en">Inventory Dashboard</span>
-      </p>
-      <h3 class="project-name">StockPro DZ</h3>
-      <div class="project-tags" aria-label="Technologies used">
-        <span class="tag"><i class="fa-brands fa-laravel" aria-hidden="true"></i> Laravel</span>
-        <span class="tag"><i class="fa-brands fa-react" aria-hidden="true"></i> React</span>
->>>>>>> 4344267aa21d7c83d4ca8f5c16fa0688ee6034e7
       </div>
       <p class="project-desc">
         <span class="lang-ar">مجموعة متنامية من مشاريع العملاء — واجهات أمامية فقط، منصات متكاملة، لوحات تحكم وإدارة — منجزة بالكامل لأصحاب الأعمال المحليين.</span>
         <span class="lang-en">A growing set of client projects — frontend-only builds, full-stack platforms, dashboards and admin panels — delivered end-to-end for local businesses.</span>
       </p>
-<<<<<<< HEAD
       <a href="https://abdelkader-mokhtari.netlify.app/pages/freelance" class="project-link" target="_blank" rel="noopener noreferrer" aria-label="View Freelance Systems case study">
         <span class="lang-ar">دراسة الحالة</span><span class="lang-en">Case Study</span>
-=======
-      <a href="projects/stockpro-dz-project.html" class="project-link">
-        <span class="lang-ar">عرض المشروع</span><span class="lang-en">View Project</span>
->>>>>>> 4344267aa21d7c83d4ca8f5c16fa0688ee6034e7
         <i class="fa-solid fa-arrow-right arrow-icon" aria-hidden="true"></i>
       </a>
     </div>
@@ -1116,7 +925,7 @@ footer {
 
   <div class="projects-grid">
 
-    <!-- Card 1: PDF Chatbot -->
+    <!-- PDF Chatbot -->
     <div class="project-card fade-in fade-in-delay-1">
       <p class="project-type">
         <i class="fa-solid fa-file-pdf" aria-hidden="true"></i>
@@ -1124,7 +933,6 @@ footer {
       </p>
       <h3 class="project-name">PDF Chatbot</h3>
       <div class="project-tags" aria-label="Technologies used">
-<<<<<<< HEAD
         <span class="tag">Groq API</span>
         <span class="tag">Python</span>
         <span class="tag">RAG</span>
@@ -1135,33 +943,16 @@ footer {
       </p>
       <a href="https://abdelkader-mokhtari.netlify.app/pages/pdfchatbot" class="project-link" target="_blank" rel="noopener noreferrer" aria-label="View PDF Chatbot case study">
         <span class="lang-ar">دراسة الحالة</span><span class="lang-en">Case Study</span>
-=======
-        <span class="tag">Python</span>
-        <span class="tag">Groq AI</span>
-        <span class="tag">Flask</span>
-      </div>
-      <p class="project-desc">
-        <span class="lang-ar">بوت ذكي يقرأ أي ملف PDF ويجيب على أسئلتك منه فوراً — مثالي للشركات والمكتبات الرقمية.</span>
-        <span class="lang-en">Intelligent chatbot that reads any PDF and answers questions instantly — ideal for businesses and digital libraries.</span>
-      </p>
-      <a href="/ai_tools/pdfchatbot.html" class="project-link" aria-label="View PDF Chatbot project">
-        <span class="lang-ar">عرض المشروع</span><span class="lang-en">View Project</span>
->>>>>>> 4344267aa21d7c83d4ca8f5c16fa0688ee6034e7
         <i class="fa-solid fa-arrow-right arrow-icon" aria-hidden="true"></i>
       </a>
     </div>
 
-<<<<<<< HEAD
-    <!-- Card 2: Email Assistant -->
-=======
-    <!-- Card 2: Email Automation -->
->>>>>>> 4344267aa21d7c83d4ca8f5c16fa0688ee6034e7
+    <!-- Email Assistant -->
     <div class="project-card fade-in fade-in-delay-2">
       <p class="project-type">
         <i class="fa-solid fa-envelope-open-text" aria-hidden="true"></i>
         <span class="lang-ar">أتمتة</span><span class="lang-en">Automation</span>
       </p>
-<<<<<<< HEAD
       <h3 class="project-name">Email Assistant</h3>
       <div class="project-tags" aria-label="Technologies used">
         <span class="tag">Groq API</span>
@@ -1173,42 +964,6 @@ footer {
       </p>
       <a href="https://abdelkader-mokhtari.netlify.app/pages/emailbot" class="project-link" target="_blank" rel="noopener noreferrer" aria-label="View Email Assistant case study">
         <span class="lang-ar">دراسة الحالة</span><span class="lang-en">Case Study</span>
-=======
-      <h3 class="project-name">Email Automation</h3>
-      <div class="project-tags" aria-label="Technologies used">
-        <span class="tag">Python</span>
-        <span class="tag">Groq AI</span>
-        <span class="tag">llama-3.3</span>
-      </div>
-      <p class="project-desc">
-        <span class="lang-ar">نظام ذكي يقرأ الإيميلات الواردة ويولّد ردوداً احترافية تلقائياً بنبرة قابلة للتخصيص.</span>
-        <span class="lang-en">Smart system that reads incoming emails and auto-generates professional replies with customizable tone.</span>
-      </p>
-      <a href="#" class="project-link" aria-label="View Email Automation project">
-        <span class="lang-ar">عرض المشروع</span><span class="lang-en">View Project</span>
-        <i class="fa-solid fa-arrow-right arrow-icon" aria-hidden="true"></i>
-      </a>
-    </div>
-
-    <!-- Card 3: Telegram Bot -->
-    <div class="project-card fade-in fade-in-delay-3">
-      <p class="project-type">
-        <i class="fa-brands fa-telegram" aria-hidden="true"></i>
-        <span class="lang-ar">بوت ذكاء اصطناعي</span><span class="lang-en">AI Bot</span>
-      </p>
-      <h3 class="project-name">Telegram Bot</h3>
-      <div class="project-tags" aria-label="Technologies used">
-        <span class="tag">Python</span>
-        <span class="tag">Groq AI</span>
-        <span class="tag">python-telegram-bot</span>
-      </div>
-      <p class="project-desc">
-        <span class="lang-ar">بوت تيليغرام ذكي للأعمال الصغيرة — يرد تلقائياً، يتذكر المحادثات، وجاهز للنشر الفوري.</span>
-        <span class="lang-en">Smart Telegram bot for small businesses — auto-replies, remembers conversations, ready to deploy instantly.</span>
-      </p>
-      <a href="#" class="project-link" aria-label="View Telegram Bot project">
-        <span class="lang-ar">عرض المشروع</span><span class="lang-en">View Project</span>
->>>>>>> 4344267aa21d7c83d4ca8f5c16fa0688ee6034e7
         <i class="fa-solid fa-arrow-right arrow-icon" aria-hidden="true"></i>
       </a>
     </div>
@@ -1238,11 +993,7 @@ footer {
     <div class="contact-item">
       <div class="contact-item-icon" aria-hidden="true"><i class="fa-brands fa-instagram"></i></div>
       <p class="contact-item-label">Instagram</p>
-<<<<<<< HEAD
       <p class="contact-item-value"><a href="https://instagram.com/nuvarix.ai" target="_blank" rel="noopener noreferrer" aria-label="Nuvarix on Instagram">@nuvarix.ai</a></p>
-=======
-      <p class="contact-item-value"><a href="https://instagram.com/nuvarix1" target="_blank" rel="noopener noreferrer" aria-label="Nuvarix on Instagram">@nuvarix</a></p>
->>>>>>> 4344267aa21d7c83d4ca8f5c16fa0688ee6034e7
     </div>
     <div class="contact-item">
       <div class="contact-item-icon" aria-hidden="true"><i class="fa-solid fa-envelope"></i></div>
@@ -1257,11 +1008,7 @@ footer {
   </div>
 
   <div class="fade-in">
-<<<<<<< HEAD
     <a href="https://instagram.com/nuvarix.ai" class="btn btn-primary" target="_blank" rel="noopener noreferrer">
-=======
-    <a href="https://instagram.com/nuvarix1" class="btn btn-primary" target="_blank" rel="noopener noreferrer">
->>>>>>> 4344267aa21d7c83d4ca8f5c16fa0688ee6034e7
       <i class="fa-brands fa-instagram" aria-hidden="true"></i>
       <span class="lang-ar">أرسل رسالة مباشرة</span>
       <span class="lang-en">Send us a DM</span>
@@ -1322,7 +1069,7 @@ function setLang(l) {
   setLang(savedLang);
 })();
 
-/* ── Navbar scroll + progress bar ── */
+/* ── Navbar scroll + progress bar + back-to-top ── */
 const navbar = document.getElementById('navbar');
 const progressBar = document.getElementById('scroll-progress');
 const backToTop = document.getElementById('back-to-top');
@@ -1331,17 +1078,9 @@ window.addEventListener('scroll', () => {
   const scrolled = window.scrollY;
   navbar.classList.toggle('scrolled', scrolled > 20);
 
-<<<<<<< HEAD
   const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-  progressBar.style.width = (scrolled / docHeight * 100) + '%';
+  progressBar.style.width = (docHeight > 0 ? (scrolled / docHeight * 100) : 0) + '%';
 
-=======
-  // Progress bar
-  const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-  progressBar.style.width = (scrolled / docHeight * 100) + '%';
-
-  // Back to top button
->>>>>>> 4344267aa21d7c83d4ca8f5c16fa0688ee6034e7
   backToTop.classList.toggle('visible', scrolled > 400);
 }, { passive: true });
 
@@ -1378,18 +1117,11 @@ hamburger.addEventListener('click', () => {
 
 mobileOverlay.addEventListener('click', closeMobile);
 
-<<<<<<< HEAD
-=======
-// Close on Escape key
->>>>>>> 4344267aa21d7c83d4ca8f5c16fa0688ee6034e7
 document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape' && mobileMenu.classList.contains('open')) closeMobile();
 });
 
-<<<<<<< HEAD
-=======
 /* ── Active nav link on scroll ── */
->>>>>>> 4344267aa21d7c83d4ca8f5c16fa0688ee6034e7
 const sections = document.querySelectorAll('section[id]');
 const navLinks = document.querySelectorAll('.nav-links a[href^="#"]');
 
@@ -1398,7 +1130,6 @@ const navObserver = new IntersectionObserver((entries) => {
     if (entry.isIntersecting) {
       navLinks.forEach(link => {
         const active = link.getAttribute('href') === '#' + entry.target.id;
-        link.toggleAttribute('aria-current', active);
         if (active) link.setAttribute('aria-current', 'page');
         else link.removeAttribute('aria-current');
       });
@@ -1408,10 +1139,7 @@ const navObserver = new IntersectionObserver((entries) => {
 
 sections.forEach(s => navObserver.observe(s));
 
-<<<<<<< HEAD
-=======
-/* ── Fade-in on scroll (improved threshold) ── */
->>>>>>> 4344267aa21d7c83d4ca8f5c16fa0688ee6034e7
+/* ── Fade-in on scroll ── */
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
 }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
@@ -1420,10 +1148,6 @@ document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
 /* ── Particles ── */
 const container = document.getElementById('particles');
-<<<<<<< HEAD
-=======
-// Respect reduced motion
->>>>>>> 4344267aa21d7c83d4ca8f5c16fa0688ee6034e7
 if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
   for (let i = 0; i < 30; i++) {
     const p = document.createElement('div');
